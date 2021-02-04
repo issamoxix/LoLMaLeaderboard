@@ -1,0 +1,7 @@
+.sumrank {
+  display: flex;
+  align-items: center;
+}
+.sumrank span {
+  margin-left: 1rem;
+}
