@@ -39,11 +39,11 @@ export default function StickyHeadTable({ data }) {
             <td> {d.rate} </td>
           </tr>
         ))}
-        <tr>
+        {/* <tr>
           <td>3</td>
           <td colSpan="2">Larry the Bird</td>
           <td>@twitter</td>
-        </tr>
+        </tr> */}
       </tbody>
     </Table>
   );

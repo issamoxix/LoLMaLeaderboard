@@ -7,12 +7,15 @@ import _data_name from "../assets/quotes/name.json";
 import Table from "../components/Table";
 import Popup_cus from "../components/Popup_cus";
 import "bootstrap/dist/css/bootstrap.min.css";
+import API from "@aws-amplify/api";
+import awsmobile from "../src/aws-exports";
 
 export default function Home() {
   const [{ name, quote }, setQuote] = useState({
     name: "Yasuo",
     quote: '"Death is like the wind - always by my side."',
   });
+  const [_data, set_data] = useState([]);
   const data = [
     {
       name: "issam",
@@ -56,6 +59,15 @@ export default function Home() {
       });
     }, 6000);
   };
+
+  const get_data = async () => {
+    const res = await fetch("/api/hello");
+    const json = await res.json();
+    set_data(json);
+  };
+  useEffect(() => {
+    get_data();
+  }, []);
   useEffect(() => {
     slide_quote();
   }, []);
@@ -81,7 +93,7 @@ export default function Home() {
       <div className={styles.tableWrapper}>
         <div className={styles.Ads}></div>
         <div className={styles.table}>
-          <Table data={data} />
+          <Table data={_data} />
         </div>
         <div className={styles.Ads}></div>
       </div>
