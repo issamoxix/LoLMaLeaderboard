@@ -63,6 +63,10 @@ export default function Home() {
     <div className={styles.container}>
       <Head>
         <title>LolRankingMaroc</title>
+        <meta name="description" content="Lol Moroccan Leaderboard" />
+        <meta name="keywords" content="league of legends,lolma,Maroc" />
+        <meta name="author" content="Lol Ranking Maroc" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
       <Navbar />
       <div className={styles.heroContainer}>
