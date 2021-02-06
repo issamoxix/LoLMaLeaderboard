@@ -36,7 +36,7 @@ export default function StickyHeadTable({ data }) {
             <td> {d.tier} </td>
             <td> {d.lp} </td>
             <td> {d.level} </td>
-            <td> {d.rate} </td>
+            <td> {`${((d.W * 100) / (d.W + d.L)).toFixed(2)}%`} </td>
           </tr>
         ))}
         {/* <tr>
