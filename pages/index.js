@@ -5,13 +5,32 @@ import styles from "../styles/Home.module.css";
 import _data from "../assets/quotes/qts.json";
 import _data_name from "../assets/quotes/name.json";
 import Table from "../components/Table";
+import Popup_cus from "../components/Popup_cus";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function Home() {
   const [{ name, quote }, setQuote] = useState({
     name: "Yasuo",
     quote: '"Death is like the wind - always by my side."',
   });
-
+  const data = [
+    {
+      name: "issam",
+      tier: "challender",
+      lp: 1000,
+      level: 100,
+      rate: "90%",
+      icon: 4652,
+    },
+    {
+      name: "wa team",
+      tier: "Silver",
+      lp: 0,
+      level: 100,
+      rate: "0%",
+      icon: 4652,
+    },
+  ];
   const slide_quote = () => {
     let n = 500;
     setInterval(() => {
@@ -52,12 +71,15 @@ export default function Home() {
           <h2>
             {quote} <span>-{name} </span>
           </h2>
-          <button className={styles.join_btn}>Register Now</button>
+          <Popup_cus title="Register Now" />
         </div>
       </div>
-      <div className={styles.table}>
+      <div className={styles.tableWrapper}>
         <div className={styles.Ads}></div>
-        <Table />
+        <div className={styles.table}>
+          <Table data={data} />
+        </div>
+        <div className={styles.Ads}></div>
       </div>
     </div>
   );

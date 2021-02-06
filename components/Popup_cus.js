@@ -1,11 +1,11 @@
 import React from "react";
 import Popup from "reactjs-popup";
 import styles from "../styles/Popup.module.css";
-export default function Demo_table() {
+export default function Popup_cus({ title }) {
   return (
     <>
       <Popup
-        trigger={<button className={styles.join_btn}> Open Modal </button>}
+        trigger={<button className={styles.join_btn}> {title} </button>}
         modal
         nested
       >

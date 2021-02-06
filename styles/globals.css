@@ -15,3 +15,7 @@ a {
   box-sizing: border-box;
   outline: none;
 }
+body {
+  height: 100vh;
+  background-color: #ddd;
+}

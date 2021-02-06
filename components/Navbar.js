@@ -1,4 +1,5 @@
 import styles from "../styles/Navbar.module.css";
+import Popup_cus from "./Popup_cus";
 const Navbar = () => {
   return (
     <nav className={styles.navBar}>
@@ -6,7 +7,7 @@ const Navbar = () => {
         <h2>LolRankingMa</h2>
       </div>
       <div className={styles.Register}>
-        <button>Register</button>
+        <Popup_cus title="Register" />
       </div>
     </nav>
   );

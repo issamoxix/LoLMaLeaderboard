@@ -12,9 +12,9 @@
 }
 .Register button {
   border: 2px solid #24639f;
-  background-color: #676ae6;
+  background-color: transparent;
   border-radius: 4px;
-  padding: 10px;
+  padding: 10px 20px;
   font-weight: lighter;
   color: #fff;
   cursor: pointer;
