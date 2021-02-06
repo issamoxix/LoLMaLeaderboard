@@ -13,7 +13,7 @@ export default function Home() {
     name: "Yasuo",
     quote: '"Death is like the wind - always by my side."',
   });
-  const [_data, set_data] = useState([]);
+  const [__data, set_data] = useState([]);
 
   const slide_quote = () => {
     let n = 500;
@@ -29,15 +29,17 @@ export default function Home() {
       generate();
       let ch_name = _data_name.data[rn] ? _data_name.data[rn].name : "Yasuo";
 
-      let ch_quotes = _data[ch_name].quotes["Champion Select"];
-      let ch_quote = ch_quotes
-        ? ch_quotes[Object.keys(ch_quotes)[0]]
-        : '"Death is like the wind - always by my side."';
+      try {
+        let ch_quotes = _data[ch_name].quotes["Champion Select"];
+        let ch_quote = ch_quotes
+          ? ch_quotes[Object.keys(ch_quotes)[0]]
+          : '"Death is like the wind - always by my side."';
 
-      setQuote({
-        name: ch_name,
-        quote: ch_quote,
-      });
+        setQuote({
+          name: ch_name,
+          quote: ch_quote,
+        });
+      } catch (e) {}
     }, 6000);
   };
 
@@ -74,7 +76,7 @@ export default function Home() {
       <div className={styles.tableWrapper}>
         <div className={styles.Ads}></div>
         <div className={styles.table}>
-          <Table data={_data} />
+          <Table data={__data} />
         </div>
         <div className={styles.Ads}></div>
       </div>
