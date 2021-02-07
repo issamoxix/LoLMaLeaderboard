@@ -57,6 +57,9 @@
   transition: all 0.4s ease-in-out;
   /* font-weight: lighter; */
 }
+.btn-primary {
+  background-color: transparent;
+}
 .join_btn:hover {
   transform: translateY(-3px);
   background-color: #24639f;

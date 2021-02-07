@@ -25,3 +25,8 @@
   cursor: pointer;
   font-weight: lighter;
 }
+@media (max-width: 600px) {
+  .Register {
+    display: none;
+  }
+}

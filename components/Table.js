@@ -1,6 +1,6 @@
 import { Avatar } from "@material-ui/core";
 import Table from "react-bootstrap/Table";
-import st from "../styles/Table.module.css";
+import styles from "../styles/Table.module.css";
 export default function StickyHeadTable({ data }) {
   return (
     <Table striped bordered hover>
@@ -34,7 +34,7 @@ export default function StickyHeadTable({ data }) {
                   {d.name}
                 </h4>{" "}
               </td>
-              <td> {d.tier} </td>
+              <td> {`${d.tier} ${d.rank}`} </td>
               <td> {d.lp} </td>
               <td> {d.level} </td>
               <td> {`${((d.W * 100) / (d.W + d.L)).toFixed(2)}%`} </td>

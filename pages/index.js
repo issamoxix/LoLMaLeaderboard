@@ -44,10 +44,11 @@ export default function Home() {
   };
 
   const get_data = async () => {
-    const res = await fetch("/api/hello");
+    const res = await fetch(`/api/hello`);
     const json = await res.json();
     set_data(json);
   };
+
   useEffect(() => {
     get_data();
   }, []);

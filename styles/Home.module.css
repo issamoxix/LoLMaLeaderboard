@@ -68,3 +68,13 @@
 .Ads {
   flex-grow: 1;
 }
+@media (max-width: 600px) {
+  .wrapper h1 {
+    font-size: 7vw;
+    text-align: center;
+  }
+  .wrapper h2 {
+    font-size: 5vw;
+    text-align: center;
+  }
+}
