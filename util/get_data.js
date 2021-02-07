@@ -1,6 +1,6 @@
 const https = require("https");
 const champs_list = require("./champ.json");
-const key = "RGAPI-3dde4d51-7661-4be5-a80a-e1da3c919aec";
+const key = "RGAPI-4db176ce-822f-4858-929e-3a61f817cdea";
 // url to get username id's
 let url = (username) =>
   `https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${username}?api_key=${key}`;
