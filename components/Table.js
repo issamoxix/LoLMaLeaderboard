@@ -1,13 +1,23 @@
 import { Avatar } from "@material-ui/core";
 import Table from "react-bootstrap/Table";
 import styles from "../styles/Table.module.css";
+import RefreshIcon from "@material-ui/icons/Refresh";
 export default function StickyHeadTable({ data }) {
+  const get_data = async () => {
+    const res = await fetch(`/api/hello`);
+    const json = await res.json();
+    // set_data(json);
+    data = json;
+  };
+
   return (
     <Table striped bordered hover>
       <thead>
         <tr>
           <th>#</th>
-          <th>Summoner Name</th>
+          <th>
+            Summoner Name <RefreshIcon onClick={() => get_data()} />{" "}
+          </th>
           <th>Tier</th>
           <th>LP</th>
           <th>Level</th>
