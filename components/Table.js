@@ -2,12 +2,11 @@ import { Avatar } from "@material-ui/core";
 import Table from "react-bootstrap/Table";
 import styles from "../styles/Table.module.css";
 import RefreshIcon from "@material-ui/icons/Refresh";
-export default function StickyHeadTable({ data }) {
+export default function StickyHeadTable({ data, set }) {
   const get_data = async () => {
     const res = await fetch(`/api/hello`);
     const json = await res.json();
-    // set_data(json);
-    data = json;
+    set(json);
   };
 
   return (

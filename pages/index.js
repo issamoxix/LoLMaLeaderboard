@@ -77,7 +77,7 @@ export default function Home() {
       <div className={styles.tableWrapper}>
         <div className={styles.Ads}></div>
         <div className={styles.table}>
-          <Table data={__data} />
+          <Table data={__data} set={set_data} />
         </div>
         <div className={styles.Ads}></div>
       </div>
