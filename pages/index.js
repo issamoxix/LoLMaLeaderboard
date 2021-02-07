@@ -13,7 +13,6 @@ export default function Home() {
     name: "Yasuo",
     quote: '"Death is like the wind - always by my side."',
   });
-  const [__data, set_data] = useState([]);
 
   const slide_quote = () => {
     let n = 500;
@@ -43,15 +42,6 @@ export default function Home() {
     }, 6000);
   };
 
-  const get_data = async () => {
-    const res = await fetch(`/api/hello`);
-    const json = await res.json();
-    set_data(json);
-  };
-
-  useEffect(() => {
-    get_data();
-  }, []);
   useEffect(() => {
     slide_quote();
   }, []);
@@ -77,7 +67,7 @@ export default function Home() {
       <div className={styles.tableWrapper}>
         <div className={styles.Ads}></div>
         <div className={styles.table}>
-          <Table data={__data} set={set_data} />
+          <Table />
         </div>
         <div className={styles.Ads}></div>
       </div>

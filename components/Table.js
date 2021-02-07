@@ -2,13 +2,18 @@ import { Avatar } from "@material-ui/core";
 import Table from "react-bootstrap/Table";
 import styles from "../styles/Table.module.css";
 import RefreshIcon from "@material-ui/icons/Refresh";
-export default function StickyHeadTable({ data, set }) {
+import { useState, useEffect } from "react";
+
+export default function StickyHeadTable() {
+  const [data, setData] = useState();
   const get_data = async () => {
     const res = await fetch(`/api/hello`);
     const json = await res.json();
-    set(json);
+    setData(json);
   };
-
+  useEffect(() => {
+    get_data();
+  }, []);
   return (
     <Table striped bordered hover>
       <thead>
@@ -50,7 +55,16 @@ export default function StickyHeadTable({ data, set }) {
             </tr>
           ))
         ) : (
-          <h1>Loading ....</h1>
+          <tr>
+            <td colSpan="6">
+              <center>
+                <img
+                  alt="Loading"
+                  src="https://developer.riotgames.com/static/img/katarina.55a01cf0560a.gif"
+                />
+              </center>
+            </td>
+          </tr>
         )}
         {/* <tr>
           <td>3</td>
