@@ -6,6 +6,11 @@ handler.use(middleware);
 handler.get(async (req, res) => {
   let doc = await req.db;
   let data = req.query;
-  res.json(doc);
+  let ct = await req.ct;
+  res.json({
+    data: doc,
+    ct: ct,
+  });
+  // res.json(doc);
 });
 export default handler;

@@ -1,6 +1,7 @@
 const https = require("https");
+const key_file = require("./key.json");
 const champs_list = require("./champ.json");
-const key = "RGAPI-4db176ce-822f-4858-929e-3a61f817cdea";
+const key = key_file.key;
 // url to get username id's
 let url = (username) =>
   `https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${username}?api_key=${key}`;
@@ -38,6 +39,11 @@ export default async function launch(Username) {
   var level = info.summonerLevel;
   let info_account = JSON.parse(await get_info(url2(info_id)));
   if (info_account.length !== 0) {
+    info_account.map((dt) => {
+      if (dt.queueType == "RANKED_SOLO_5x5") {
+        info_account = [dt];
+      }
+    });
     if (info_account[0].queueType != "RANKED_SOLO_5x5") {
       console.log("Loading ...");
       return await launch(Username);

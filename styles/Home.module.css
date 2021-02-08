@@ -64,6 +64,9 @@
 }
 .table {
   flex-grow: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .Ads {
   flex-grow: 1;
