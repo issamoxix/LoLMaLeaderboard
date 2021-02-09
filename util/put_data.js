@@ -2,6 +2,7 @@ import { MongoClient } from "mongodb";
 import nextConnect from "next-connect";
 import launch from "./get_data";
 import rank_calc from "./rank_cal";
+import insert_data from "./redis_db";
 // const url ="mongodb+srv://admin1:issamroot123@lolma.aan0s.mongodb.net/users?retryWrites=true&w=majority";
 const url = "mongodb://localhost:27017/";
 const client = new MongoClient(url, {
@@ -29,7 +30,7 @@ async function put_data(req, res, next) {
       L: _data.losses,
       ...data.champs_mystery,
     };
-
+    insert_data(req.query.name, obj.rank_all);
     req.db
       .collection("users")
       .find({ name: _data.summonerName }, { $exists: true })
@@ -41,16 +42,22 @@ async function put_data(req, res, next) {
             .collection("users")
             .updateOne({ name: _data.summonerName }, { $set: obj }, (o, d) => {
               if (o) throw o;
+              console.log("Refreshed Succ");
+
+              res.json({ done: "Refreshed" });
             });
         } else {
           console.log('doesn"t exits');
-          req.db.collection("users").insertOne(obj, (error, res) => {
+          req.db.collection("users").insertOne(obj, (error, rex) => {
             if (error) throw error;
             console.log("added Succ ");
+
+            res.json({ done: "Added" });
           });
         }
       });
   });
+
   return next();
 }
 const middleware = nextConnect();

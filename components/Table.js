@@ -2,11 +2,10 @@ import { Avatar } from "@material-ui/core";
 import Table from "react-bootstrap/Table";
 import Pagination from "react-bootstrap/Pagination";
 import styles from "../styles/Table.module.css";
-import RefreshIcon from "@material-ui/icons/Refresh";
 
 import { useState, useEffect } from "react";
 
-export default function StickyHeadTable() {
+export default function Table_Data({ tresh, setTresh }) {
   const [data, setData] = useState();
   const [pages, setPages] = useState();
   const [rank, setRank] = useState(0);
@@ -16,6 +15,7 @@ export default function StickyHeadTable() {
     setActive(1);
   };
   const get_data = async (skip = 0) => {
+    setData();
     const res = await fetch(`/api/hello?skip=${skip}`);
     const json = await res.json();
 
@@ -43,6 +43,11 @@ export default function StickyHeadTable() {
   }
 
   useEffect(() => {
+    handleDefault();
+    get_data();
+    setTresh(false);
+  }, [tresh]);
+  useEffect(() => {
     get_data();
   }, []);
   return (
@@ -51,15 +56,7 @@ export default function StickyHeadTable() {
         <thead>
           <tr>
             <th>#</th>
-            <th>
-              Summoner Name{" "}
-              <RefreshIcon
-                onClick={() => {
-                  handleDefault();
-                  get_data();
-                }}
-              />{" "}
-            </th>
+            <th>Summoner Name </th>
             <th>Tier</th>
             <th>LP</th>
             <th>Level</th>

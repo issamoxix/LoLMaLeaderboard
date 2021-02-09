@@ -5,7 +5,7 @@ import FormControl from "react-bootstrap/FormControl";
 import { useState } from "react";
 import styles from "../styles/Popup.module.css";
 
-export default function Popup_cus({ title }) {
+export default function Popup_cus({ title, fresh, setfre }) {
   const [show, setShow] = useState(false);
   const [input, setInput] = useState();
   const [laoding, setLoading] = useState(2);
@@ -14,7 +14,8 @@ export default function Popup_cus({ title }) {
   const handleAdd = async () => {
     setLoading(0);
     const res = await fetch(`/api/add?name=${input}`);
-    setLoading(1);
+    setLoading(2);
+    setfre(true);
     setInput();
     handleClose();
   };

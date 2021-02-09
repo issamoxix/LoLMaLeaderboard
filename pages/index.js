@@ -4,11 +4,12 @@ import Navbar from "../components/Navbar";
 import styles from "../styles/Home.module.css";
 import _data from "../assets/quotes/qts.json";
 import _data_name from "../assets/quotes/name.json";
-import Table from "../components/Table";
+import Table_Data from "../components/Table";
 import Popup_cus from "../components/Popup_cus";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function Home() {
+  const [refresh, setRefresh] = useState(false);
   const [{ name, quote }, setQuote] = useState({
     name: "Yasuo",
     quote: '"Death is like the wind - always by my side."',
@@ -61,13 +62,13 @@ export default function Home() {
           <h2>
             {quote} <span>-{name} </span>
           </h2>
-          <Popup_cus title="Register Now" />
+          <Popup_cus title="Register Now" fresh={refresh} setfre={setRefresh} />
         </div>
       </div>
       <div className={styles.tableWrapper}>
         <div className={styles.Ads}></div>
         <div className={styles.table}>
-          <Table />
+          <Table_Data tresh={refresh} setTresh={setRefresh} />
         </div>
         <div className={styles.Ads}></div>
       </div>
