@@ -26,12 +26,16 @@ export default function Table_Data({ tresh, setTresh }) {
   };
 
   let items = [];
+  let n;
   for (let number = 1; number <= pages; number++) {
     items.push(
       <Pagination.Item
         onClick={() => {
           setRank((number - 1) * 10);
-          get_data((number - 1) * 10);
+
+          number === 1
+            ? get_data((number - 1) * 10)
+            : get_data((number - 1) * 10 + 1);
           setActive(number);
         }}
         key={number}
