@@ -6,7 +6,7 @@ body {
 th .MuiSvgIcon-root {
   cursor: pointer;
   color: gray;
-  transition: all 0.4s ease-in-out;
+  transition: color 0.4s ease-in-out;
 }
 th .MuiSvgIcon-root:hover {
   color: #000;
