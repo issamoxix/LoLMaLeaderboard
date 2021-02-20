@@ -1,32 +1,52 @@
-.navBar {
+.header {
   width: 100%;
-  height: 80px;
+  /* height: 69px; */
+  height: 10.5vh;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 2rem;
-  background-color: #535bfa;
+  padding: 10px 30px;
+  background: #535bfa;
+  position: relative;
   -webkit-box-shadow: 0px 3px 9px -1px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 0px 3px 9px -1px rgba(0, 0, 0, 0.75);
   box-shadow: 0px 3px 9px -1px rgba(0, 0, 0, 0.75);
 }
-.Register button {
-  border: 2px solid #24639f;
-  background-color: transparent;
-  border-radius: 4px;
-  padding: 10px 20px;
-  font-weight: lighter;
-  color: #fff;
-  cursor: pointer;
-  font-size: 18px;
+.nav_list {
+  list-style: none;
+  display: flex;
+  margin: 0;
 }
-.logo h2 {
-  color: #fff;
-  cursor: pointer;
-  font-weight: lighter;
+.nav_container {
+  display: flex;
+  align-items: center;
 }
-@media (max-width: 600px) {
-  .Register {
-    display: none;
-  }
+.list_item {
+  margin: 0 10px;
+}
+.search_container input {
+  border: none;
+  font-size: 14px;
+  padding: 10px;
+  border-radius: 10px;
+  outline: none;
+}
+.logo_container h2 {
+  color: #fff;
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+.nav_link {
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  color: #ddd;
+  transition: all 0.4s ease-in-out;
+}
+.nav-link:hover {
+  color: #fff;
+  border-bottom: 1px solid #fff;
+}
+.search_container {
+  margin: 0 10px;
 }

@@ -5,7 +5,7 @@ import styles from "../styles/Table.module.css";
 
 import { useState, useEffect } from "react";
 
-export default function Table_Data({ tresh, setTresh }) {
+export default function Table_Data({ limite, tresh, setTresh }) {
   const [data, setData] = useState();
   const [pages, setPages] = useState();
   const [rank, setRank] = useState(0);
@@ -16,12 +16,14 @@ export default function Table_Data({ tresh, setTresh }) {
   };
   const get_data = async (skip = 0) => {
     setData();
-    const res = await fetch(`/api/hello?skip=${skip}`);
+    const res = await fetch(`/api/hello?skip=${skip}&limite=${limite}`);
     const json = await res.json();
 
     setData(json.data);
     setPages(
-      (json.ct / 10) % 1 == 0 ? json.ct / 10 : parseInt(json.ct / 10 + 1)
+      (json.ct / limite) % 1 == 0
+        ? json.ct / limite
+        : parseInt(json.ct / limite + 1)
     );
   };
 
@@ -31,11 +33,11 @@ export default function Table_Data({ tresh, setTresh }) {
     items.push(
       <Pagination.Item
         onClick={() => {
-          setRank((number - 1) * 10);
+          setRank((number - 1) * limite);
 
           number === 1
-            ? get_data((number - 1) * 10)
-            : get_data((number - 1) * 10 + 1);
+            ? get_data((number - 1) * limite)
+            : get_data((number - 1) * limite + 1);
           setActive(number);
         }}
         key={number}
@@ -71,7 +73,7 @@ export default function Table_Data({ tresh, setTresh }) {
           {data ? (
             data.map((d, k) => (
               <tr key={k + 1}>
-                <td>{rank + k + 1}</td>
+                <td style={{ verticalAlign: "middle" }}>{rank + k + 1}</td>
                 <td>
                   <h4
                     style={{
@@ -87,10 +89,18 @@ export default function Table_Data({ tresh, setTresh }) {
                     {d.name}
                   </h4>{" "}
                 </td>
-                <td> {`${d.tier} ${d.rank}`} </td>
-                <td> {d.lp} </td>
-                <td> {d.level} </td>
-                <td> {`${((d.W * 100) / (d.W + d.L)).toFixed(2)}%`} </td>
+                <td style={{ verticalAlign: "middle" }}>
+                  {" "}
+                  {d.tier === "CHALLENGER"
+                    ? d.tier
+                    : `${d.tier} ${d.rank}`}{" "}
+                </td>
+                <td style={{ verticalAlign: "middle" }}> {d.lp} </td>
+                <td style={{ verticalAlign: "middle" }}> {d.level} </td>
+                <td style={{ verticalAlign: "middle" }}>
+                  {" "}
+                  {`${((d.W * 100) / (d.W + d.L)).toFixed(2)}%`}{" "}
+                </td>
               </tr>
             ))
           ) : (

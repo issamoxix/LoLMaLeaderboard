@@ -1,0 +1,16 @@
+.container {
+  height: 100vh;
+}
+.ads {
+  flex-grow: 3;
+}
+.table {
+  flex-wrap: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.table_container {
+  margin-top: 10px;
+  display: flex;
+}

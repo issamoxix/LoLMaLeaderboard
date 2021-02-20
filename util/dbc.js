@@ -14,9 +14,9 @@ async function database(req, res, next) {
     .db("lolrank")
     .collection("users")
     .find()
-    .limit(10)
+    .limit(parseInt(req.query.limite))
     .skip(req.query.skip ? parseInt(req.query.skip) : 0)
-    .sort({ rank_all: -1 })
+    .sort({ rank_all: -1, level: -1 })
     .toArray();
   req.ct = client.db("lolrank").collection("users").count();
   return next();

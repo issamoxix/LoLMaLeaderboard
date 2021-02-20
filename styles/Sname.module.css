@@ -1,0 +1,77 @@
+.container {
+  height: 89.5vh;
+  width: 100%;
+  /* background-color: black; */
+  padding: 0 30px;
+  display: flex;
+  align-items: center;
+}
+.detail {
+  height: 70%;
+  border-radius: 10px;
+  width: 300px;
+  /* background-color: #2c5c54; */
+  background: linear-gradient(
+    167.34deg,
+    #2c5c54 -40.87%,
+    #2c5c54 -26.32%,
+    #2c5c54 -2.05%,
+    rgba(44, 92, 84, 0.66) 63.1%,
+    rgba(12, 15, 14, 0.63) 87.34%,
+    rgba(40, 148, 130, 0) 87.35%,
+    rgba(12, 15, 14, 0.63) 87.37%
+  );
+  /* clip-path: polygon(100% 0, 100% 100%, 81% 73%, 50% 73%, 19% 72%, 0 100%, 0 0); */
+  clip-path: circle(68% at 50% 31%);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.Sicon {
+  width: 50%;
+  border-radius: 50%;
+
+  border: 3px solid #d0bdad;
+  margin-top: -26%;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+.Slevel {
+  color: #fff;
+  margin-top: -6%;
+  height: 24px;
+  width: 40px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 9px;
+  background-color: #000;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+.Sname h1 {
+  color: #fff;
+
+  font-weight: lighter;
+}
+
+.Stier {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.tier {
+  width: 50%;
+}
+.Srank h2 {
+  color: #ddd;
+  font-weight: bold;
+}
+.Slp {
+  color: #ddd;
+  font-weight: bold;
+}
+.Mrank {
+  color: #921f1f;
+  font-weight: bold;
+}
