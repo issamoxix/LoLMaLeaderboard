@@ -19,7 +19,7 @@ async function put_data(req, res, next) {
     console.log(_data.summonerName);
 
     var obj = {
-      name: _data.summonerName,
+      name: _data.summonerName && _data.summonerName.toLowerCase(),
       tier: _data.tier,
       rank: _data.rank,
       rank_all: rank_calc(_data.tier, _data.rank, parseInt(_data.leaguePoints)),
@@ -30,10 +30,13 @@ async function put_data(req, res, next) {
       L: _data.losses,
       ...data.champs_mystery,
     };
-    insert_data(req.query.name, obj.rank_all);
+    insert_data(req.query.name, obj.rank_all, obj.level);
     req.db
       .collection("users")
-      .find({ name: _data.summonerName }, { $exists: true })
+      .find(
+        { name: _data.summonerName && _data.summonerName.toLowerCase() },
+        { $exists: true }
+      )
       .toArray((e, doc) => {
         if (e) throw e;
         if (doc.length != 0) {

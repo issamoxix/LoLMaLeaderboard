@@ -1,62 +1,11 @@
 import { Avatar } from "@material-ui/core";
 import Table from "react-bootstrap/Table";
-import Pagination from "react-bootstrap/Pagination";
-import styles from "../styles/Table.module.css";
 
 import { useState, useEffect } from "react";
-import Link from "next/link";
 
-export default function Table_Data({ limite, tresh, setTresh }) {
+export default function Ladder_tabble({ rank_all }) {
   const [data, setData] = useState();
-  const [pages, setPages] = useState();
-  const [rank, setRank] = useState(0);
-  const [active, setActive] = useState(1);
-  const handleDefault = () => {
-    setRank(0);
-    setActive(1);
-  };
-  const get_data = async (skip = 0) => {
-    setData();
-    const res = await fetch(`/api/hello?skip=${skip}&limite=${limite}`);
-    const json = await res.json();
 
-    setData(json.data);
-    setPages(
-      (json.ct / limite) % 1 == 0
-        ? json.ct / limite
-        : parseInt(json.ct / limite + 1)
-    );
-  };
-
-  let items = [];
-  let n;
-  for (let number = 1; number <= pages; number++) {
-    items.push(
-      <Pagination.Item
-        onClick={() => {
-          setRank((number - 1) * limite);
-
-          number === 1
-            ? get_data((number - 1) * limite)
-            : get_data((number - 1) * limite); // add a +1 if u find any errors
-          setActive(number);
-        }}
-        key={number}
-        active={number === active}
-      >
-        {number}
-      </Pagination.Item>
-    );
-  }
-
-  useEffect(() => {
-    handleDefault();
-    get_data();
-    setTresh(false);
-  }, [tresh]);
-  useEffect(() => {
-    get_data();
-  }, []);
   return (
     <>
       <Table striped bordered hover>
@@ -87,16 +36,7 @@ export default function Table_Data({ limite, tresh, setTresh }) {
                       src={`http://ddragon.leagueoflegends.com/cdn/11.3.1/img/profileicon/${d.icon}.png`}
                     />
                     <span style={{ marginRight: "10px" }}></span>
-                    <Link href={`/ranking/${d.name}`}>
-                      <a
-                        style={{
-                          color: "initial",
-                          textDecorationStyle: "none",
-                        }}
-                      >
-                        {d.name}
-                      </a>
-                    </Link>
+                    {d.name}
                   </h4>{" "}
                 </td>
                 <td style={{ verticalAlign: "middle" }}>
@@ -132,7 +72,6 @@ export default function Table_Data({ limite, tresh, setTresh }) {
         </tr> */}
         </tbody>
       </Table>
-      {data && <Pagination>{items}</Pagination>}
     </>
   );
 }

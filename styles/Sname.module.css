@@ -5,8 +5,10 @@
   padding: 0 30px;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 .detail {
+  margin: 0 10px;
   height: 70%;
   border-radius: 10px;
   width: 300px;
@@ -49,9 +51,12 @@
   background-color: #000;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
+.Slevel p {
+  margin: 0;
+}
 .Sname h1 {
   color: #fff;
-
+  font-size: 26px;
   font-weight: lighter;
 }
 
@@ -74,4 +79,7 @@
 .Mrank {
   color: #921f1f;
   font-weight: bold;
+}
+.ladder {
+  margin: 0 10px;
 }

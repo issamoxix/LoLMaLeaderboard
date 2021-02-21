@@ -1,16 +1,19 @@
 const https = require("https");
-const key_file = require("./key.json");
+// const key_file = require("./key.json");
 const champs_list = require("./champ.json");
-const key = key_file.key;
+const mgurl = "mongodb://localhost:27017/";
+
+const mongoCl = require("mongodb").MongoClient;
+
 // url to get username id's
-let url = (username) =>
+let url = (username, key) =>
   `https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${username}?api_key=${key}`;
 // url2 to get user rank data
-let url2 = (id) =>
+let url2 = (id, key) =>
   `https://euw1.api.riotgames.com/lol/league/v4/entries/by-summoner/${id}?api_key=${key}`;
 
 // get user champion mastery
-let url3 = (u_id) =>
+let url3 = (u_id, key) =>
   `https://euw1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/${u_id}?api_key=${key}`;
 
 const get_info = async (url) => {
@@ -33,11 +36,16 @@ const get_info = async (url) => {
   return await response;
 };
 export default async function launch(Username) {
-  let info = JSON.parse(await get_info(url(Username)));
+  var db = await mongoCl.connect(mgurl, { useUnifiedTopology: true });
+  var dbo = db.db("lolrank");
+  var akey = await dbo.collection("riot_api").find().toArray();
+  var key = akey[0].key;
+  db.close();
+  let info = JSON.parse(await get_info(url(Username, key)));
   const info_id = info.id;
   var icon = info.profileIconId;
   var level = info.summonerLevel;
-  let info_account = JSON.parse(await get_info(url2(info_id)));
+  let info_account = JSON.parse(await get_info(url2(info_id, key)));
   if (info_account.length !== 0) {
     info_account.map((dt) => {
       if (dt.queueType == "RANKED_SOLO_5x5") {
@@ -49,7 +57,7 @@ export default async function launch(Username) {
       return await launch(Username);
     }
   }
-  let champs_info = JSON.parse(await get_info(url3(info.id)));
+  let champs_info = JSON.parse(await get_info(url3(info.id, key)));
   // console.log(info_account);
   // console.log(champs_info.slice(0, 3));
   let ch1 = champs_list[parseInt(champs_info[0].championId)];
