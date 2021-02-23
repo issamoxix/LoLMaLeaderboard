@@ -1,5 +1,5 @@
 const https = require("https");
-// const key_file = require("./key.json");
+
 const champs_list = require("./champ.json");
 const mgurl = "mongodb://localhost:27017/";
 
