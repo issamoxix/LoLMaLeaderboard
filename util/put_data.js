@@ -12,10 +12,13 @@ const client = new MongoClient(url, {
 async function put_data(req, res, next) {
   if (!client.isConnected()) await client.connect();
   req.dbClient = client;
-
+  function encode_utf8(s) {
+    return unescape(encodeURIComponent(s));
+  }
   req.db = client.db("lolrank");
-  launch(req.query.name).then((data) => {
+  launch(encode_utf8(req.query.name)).then((data) => {
     let _data = data.data[0];
+    // console.log(encode_utf8(req.query.name));
     console.log(_data.summonerName);
 
     var obj = {
@@ -30,7 +33,7 @@ async function put_data(req, res, next) {
       L: _data.losses,
       ...data.champs_mystery,
     };
-    insert_data(req.query.name, obj.rank_all, obj.level);
+    insert_data(encode_utf8(req.query.name), obj.rank_all, obj.level);
     req.db
       .collection("users")
       .find(
