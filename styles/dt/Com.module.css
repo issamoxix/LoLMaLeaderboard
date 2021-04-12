@@ -1,0 +1,80 @@
+.Wrapper {
+  background-color: var(--com);
+  width: 90%;
+  min-height: 30%;
+  max-height: 100%;
+  border-radius: 16px;
+  padding: 15px;
+  margin: 15px 0;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  overflow: auto;
+}
+.MobileContainer {
+  background-color: var(--com);
+  width: 100%;
+  min-height: 8%;
+  z-index: 10;
+  position: fixed;
+  top: 0;
+  padding: 15px;
+  /* margin: 15px 0; */
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  overflow: auto;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: center;
+}
+.MobileContainer h2 {
+  color: #ddd;
+}
+
+.NasWrapper {
+  background-color: var(--com);
+  width: 40%;
+  min-height: 30%;
+  max-height: 100%;
+  border-radius: 16px;
+  padding: 15px;
+  /* margin: 15px 10px; */
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  overflow: auto;
+}
+.Lu {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.Lu h2 {
+  color: #fff;
+  margin-bottom: 13px;
+}
+.Lu p {
+  margin-bottom: 13px;
+  color: #ddd;
+}
+.Lu button {
+  background-color: var(--sky);
+  border: none;
+  margin-top: auto;
+  margin-left: auto;
+  margin-right: 5%;
+  padding: 10px 19px;
+  width: 40%;
+  cursor: pointer;
+  color: #fff;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 125px 0px;
+}
+@media (max-width: 900px) {
+  .NasWrapper {
+    width: 90%;
+    margin-bottom: 15px;
+  }
+}

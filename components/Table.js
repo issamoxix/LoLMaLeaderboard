@@ -8,9 +8,9 @@ import Link from "next/link";
 
 export default function Table_Data({ limite, tresh, setTresh }) {
   const [data, setData] = useState();
-  const [pages, setPages] = useState();
   const [rank, setRank] = useState(0);
   const [active, setActive] = useState(1);
+  const [pages, setPages] = useState();
   const handleDefault = () => {
     setRank(0);
     setActive(1);

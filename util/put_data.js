@@ -44,6 +44,8 @@ async function put_data(req, res, next) {
         if (e) throw e;
         if (doc.length != 0) {
           console.log("exists !!");
+          console.log(obj);
+          console.log("Name here => ", _data.summonerName);
           req.db
             .collection("users")
             .updateOne({ name: _data.summonerName }, { $set: obj }, (o, d) => {

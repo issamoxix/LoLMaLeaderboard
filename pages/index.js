@@ -1,51 +1,55 @@
+import { useSpring } from "@react-spring/core";
+import { animated } from "@react-spring/web";
 import Head from "next/head";
-import { useEffect, useState } from "react";
-import Navbar from "../components/Navbar";
-import styles from "../styles/Home.module.css";
-import _data from "../assets/quotes/qts.json";
-import _data_name from "../assets/quotes/name.json";
-import Table_Data from "../components/Table";
-import Popup_cus from "../components/Popup_cus";
-import "bootstrap/dist/css/bootstrap.min.css";
-import SideBar from "../components/SideBar";
+import React, { useReducer, useState } from "react";
+import Home from ".";
+import { Data } from "../components/dt/data";
+import Infos from "../components/dt/Infos";
+import Landing from "../components/dt/Landing";
+import Mcom from "../components/dt/Mcom";
+import Modal from "../components/dt/Modal";
+import NasCom from "../components/dt/NasCom";
+import SideBody from "../components/dt/SideBody";
+import SideFooter from "../components/dt/SideFooter";
+import SideHeader from "../components/dt/SideHeader";
+import Table from "../components/dt/Table";
+import styles from "../styles/dt/Home.module.css";
+import HomeComp from "../components/dt/pages/Home";
+import LeaderBoard from "../components/dt/pages/LeaderBoard";
+import MobileNav from "../components/dt/MobileNav";
+import { useEffect } from "react";
 
-export default function Home() {
-  const [refresh, setRefresh] = useState(false);
-  const [{ name, quote }, setQuote] = useState({
-    name: "Yasuo",
-    quote: '"Death is like the wind - always by my side."',
+function reducer(state, action) {
+  switch (action.type) {
+    case "H":
+      return { comp: <HomeComp />, label: "Home" };
+    case "L":
+      return { comp: <LeaderBoard />, label: "Ladder" };
+    default:
+      return { comp: <HomeComp />, label: "Home" };
+  }
+}
+
+function dt() {
+  const [{ comp, label }, dispatch] = useReducer(reducer, {
+    comp: <HomeComp />,
+    label: "Home",
   });
-
-  const slide_quote = () => {
-    let n = 500;
-    setInterval(() => {
-      let rn = 157;
-      let generate = () => {
-        rn = Math.floor(Math.random() * n) + 1;
-        let ch_dik = _data_name.data[rn];
-        if (!ch_dik) {
-          return generate();
-        }
-      };
-      generate();
-      let ch_name = _data_name.data[rn] ? _data_name.data[rn].name : "Yasuo";
-
-      try {
-        let ch_quotes = _data[ch_name].quotes["Champion Select"];
-        let ch_quote = ch_quotes
-          ? ch_quotes[Object.keys(ch_quotes)[0]]
-          : '"Death is like the wind - always by my side."';
-
-        setQuote({
-          name: ch_name,
-          quote: ch_quote,
-        });
-      } catch (e) {}
-    }, 6000);
-  };
-
+  const [show, setShow] = useState(false);
+  const [Mob, setM] = useState(false);
+  const [toggle, settoggle] = useState(true);
+  const animation = useSpring({
+    opacity: show ? 1 : 0,
+    transform: show ? "translateY(0%)" : "translateY(-50%)",
+    width: "100vw",
+    height: "100vh",
+    position: "fixed",
+    left: 0,
+    top: 0,
+    display: !show && "none",
+  });
   useEffect(() => {
-    slide_quote();
+    window.innerWidth <= 900 && setM(true);
   }, []);
   return (
     <div className={styles.container}>
@@ -61,24 +65,34 @@ export default function Home() {
         />
         <meta name="author" content="Issam.H" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+          rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+          crossorigin="anonymous"
+        />
       </Head>
-      <Navbar refresh={refresh} setRefresh={setRefresh} />
-      <div className={styles.heroContainer}>
-        <div className={styles.wrapper}>
-          <h1>League of Legends Moroccan Leaderboard</h1>
-          <h2>
-            {quote} <span>-{name} </span>
-          </h2>
-          <Popup_cus title="Register Now" fresh={refresh} setfre={setRefresh} />
-        </div>
+      <div
+        style={{ transform: Mob && toggle && "translateX(-100%)" }}
+        className={`${styles.sideBar} `}
+      >
+        <SideHeader></SideHeader>
+        <SideBody page={label} dis={dispatch}></SideBody>
+        <SideFooter>
+          <button onClick={() => setShow(!show)} className={styles.regBtn}>
+            Register
+          </button>
+        </SideFooter>
       </div>
-      <div className={styles.tableWrapper}>
-        <div className={styles.Ads}></div>
-        <div className={styles.table}>
-          <Table_Data limite={10} tresh={refresh} setTresh={setRefresh} />
-        </div>
-        <div className={styles.Ads}></div>
+      <div className={styles.Main}>
+        {Mob && <MobileNav varx={toggle} hide={settoggle} label={label} />}
+        <animated.div style={animation}>
+          <Modal show={setShow} />
+        </animated.div>
+        {comp}
       </div>
     </div>
   );
 }
+
+export default dt;

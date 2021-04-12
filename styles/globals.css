@@ -1,7 +1,16 @@
+:root {
+  --bg: #0f121d;
+  --com: #141726;
+  --bar: #0b0d15;
+  --comb: #161a2e;
+  --sky: #535bfa;
+}
+
 html,
 body {
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  background-color: var(--bg);
 }
 th .MuiSvgIcon-root {
   cursor: pointer;
@@ -25,7 +34,6 @@ a {
 
 body {
   height: 100vh;
-  background-color: #ddd;
 }
 @media (max-width: 600px) {
   td:nth-child(5),
