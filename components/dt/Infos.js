@@ -4,7 +4,7 @@ import styles from "../../styles/dt/Home.module.css";
 function Infos() {
   return (
     <div className={styles.InfosContainer}>
-      <h2 className={styles.Infotitle}>lolrankmaroc.ma v0.0.1</h2>
+      <h2 className={styles.Infotitle}>lolrankmaroc.live v0.0.1</h2>
       <p className={styles.para}>
         Im still working on this website, so if there are any bugs or feedback,
         you can contact me on my Socials or add me on Discord Issam#6576 , if

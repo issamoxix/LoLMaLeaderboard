@@ -71,6 +71,36 @@ function dt() {
           integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
           crossorigin="anonymous"
         />
+
+        <meta
+          name="image"
+          content="https://lolrankmaroc.live/images/banner.jpg"
+        />
+
+        <meta property="og:title" content="lolrankmaroc.live" />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://lolrankmaroc.live/" />
+        <meta
+          property="og:image"
+          content="https://lolrankmaroc.live/images/banner.jpg"
+        />
+        <meta
+          property="og:description"
+          content="league of legends,lolma,lol Maroc, league of legends Maroc, Moroccan Leaderboard , Top Morrcan Player"
+        />
+
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:site" content="@issamoxix" />
+        <meta name="twitter:title" content="lolrankmaroc.live" />
+        <meta
+          name="twitter:description"
+          content="league of legends,lolma,lol Maroc, league of legends Maroc, Moroccan Leaderboard , Top Morrcan Player"
+        />
+        <meta
+          name="twitter:image"
+          content="https://lolrankmaroc.live/images/banner.jpg"
+        ></meta>
+        <meta name="theme-color" content="#141726"></meta>
       </Head>
       {!toggle && (
         <div
