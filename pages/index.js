@@ -101,6 +101,7 @@ function dt() {
           content="https://lolrankmaroc.live/images/banner.jpg"
         ></meta>
         <meta name="theme-color" content="#141726"></meta>
+        <link rel="icon" href="https://lolrankmaroc.live/logo/logo3.png" />
       </Head>
       {!toggle && (
         <div

@@ -5,7 +5,7 @@ function SideHeader() {
   return (
     <div className={styles.SideHeader}>
       <a href="/">
-        <img src="/logo/logo2.png" alt="lolrankmaroc" />
+        <img src="/logo/logo3.png" alt="lolrankmaroc" />
       </a>
     </div>
   );
