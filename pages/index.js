@@ -57,7 +57,7 @@ function dt() {
         <title>LoLRankMaroc</title>
         <meta
           name="description"
-          content="League of legends Moroccan Leaderboard , ranking top Moroccan Players"
+          content="League of legends Moroccan Solo Q Leaderboard , ranking top Moroccan Players"
         />
         <meta
           name="keywords"
