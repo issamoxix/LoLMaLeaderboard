@@ -56,11 +56,11 @@
   margin-bottom: 13px;
   color: #ddd;
 }
-.Lu button {
+.btnreg {
   background-color: var(--sky);
   border: none;
   margin-top: auto;
-  margin-left: auto;
+  /* margin-left: auto; */
   margin-right: 5%;
   padding: 10px 19px;
   width: 40%;
@@ -71,6 +71,29 @@
   display: flex;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 125px 0px;
+}
+.ladder {
+  background-color: rgb(90, 26, 26);
+  border: none;
+  margin-top: auto;
+  /* margin-left: auto; */
+  margin-right: 5%;
+  padding: 10px 19px;
+  width: 40%;
+  cursor: pointer;
+  color: #fff;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  /* border-radius: 125px 0px; */
+  border-radius: 125px 0px 125px 0px;
+  /* display: block; */
+}
+.hibtn {
+  display: flex;
+  width: 100%;
+  flex-direction: row-reverse;
 }
 @media (max-width: 900px) {
   .NasWrapper {

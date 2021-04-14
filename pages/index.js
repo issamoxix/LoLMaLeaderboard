@@ -72,6 +72,12 @@ function dt() {
           crossorigin="anonymous"
         />
       </Head>
+      {!toggle && (
+        <div
+          onClick={() => settoggle(true)}
+          className={styles.sideWrapeprs}
+        ></div>
+      )}
       <div
         style={{ transform: Mob && toggle && "translateX(-100%)" }}
         className={`${styles.sideBar} `}
