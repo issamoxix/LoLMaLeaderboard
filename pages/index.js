@@ -48,9 +48,11 @@ function dt() {
     top: 0,
     display: !show && "none",
   });
+
   useEffect(() => {
     window.innerWidth <= 900 && setM(true);
   }, []);
+
   return (
     <div className={styles.container}>
       <Head>

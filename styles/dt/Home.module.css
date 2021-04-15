@@ -113,12 +113,11 @@
 .Socials i {
   font-size: 30px;
   margin-right: 20px;
-  color: var(--sky);
-  filter: brightness(0.7);
-  transition: filter 0.2s linear;
+  transition: color 0.2s linear;
+  color: #535bfa59;
 }
 .Socials i:hover {
-  filter: brightness(1);
+  color: var(--sky);
   text-decoration: none;
 }
 .Socials a {
