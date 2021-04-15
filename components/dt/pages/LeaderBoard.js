@@ -13,7 +13,7 @@ function LeaderBoard() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const { page } = router.query;
-  const { index } = router.query;
+  const { index } = router.query || 1;
   const get_data = async (skip = 0, limite = 10) => {
     setData();
     setLoading(true);
@@ -34,7 +34,7 @@ function LeaderBoard() {
     lli.push(1);
   }
   useEffect(() => {
-    get_data();
+    get_data((index - 1) * 10);
   }, []);
   useEffect(() => {
     get_data((index - 1) * 10);
