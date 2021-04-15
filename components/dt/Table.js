@@ -1,15 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../../styles/dt/Table.module.css";
-function Table({ data, active = 1, loading }) {
+function Table({ data, refresh, active = 1, loading }) {
+  const [mob, setMob] = useState(false);
+  useEffect(() => {
+    window.innerWidth <= 900 && setMob(true);
+  }, []);
+
   return (
     <table className={styles.Table}>
       <tr className={styles.TR}>
         <th>#</th>
-        <th>Summoners</th>
+        <th>
+          <div className={styles.itemsth}>
+            <h3>Summoners </h3>
+            <img
+              onClick={() => refresh((active - 1) * 10)}
+              src="/svgs/refresh.svg"
+              alt="refresh"
+            />{" "}
+          </div>
+        </th>
         <th>Tier</th>
         <th>Lp</th>
         <th>Level</th>
-        <th>Win Rate</th>
+        <th>{mob ? "W/R" : "Win Rate"}</th>
       </tr>
       {loading && (
         <img
@@ -32,7 +46,7 @@ function Table({ data, active = 1, loading }) {
                 <p> {d.name} </p>
               </div>
             </td>
-            <td> {`${d.tier} ${d.rank}`} </td>
+            <td> {`${mob ? d.tier[0] : d.tier} ${d.rank}`} </td>
             <td> {d.lp} </td>
             <td> {d.level} </td>
             <td> {`${((d.W * 100) / (d.W + d.L)).toFixed(2)}%`} </td>

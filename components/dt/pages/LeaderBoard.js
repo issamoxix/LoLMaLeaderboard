@@ -34,7 +34,7 @@ function LeaderBoard() {
   }, []);
   return (
     <Mcom>
-      <Table data={data} active={active} loading={loading} />
+      <Table data={data} refresh={get_data} active={active} loading={loading} />
       <div className={styles.pag}>
         <ul>
           {lli.map((d, key) => (

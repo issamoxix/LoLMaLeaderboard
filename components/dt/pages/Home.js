@@ -53,7 +53,7 @@ function HomeComp() {
       </NasCom>
       <Mcom>
         <h1 className={styles.topplayer}>Top 10 Moroccan Players in Solo Q</h1>
-        <Table data={data} loading={loading} />
+        <Table data={data} refresh={get_data} loading={loading} />
       </Mcom>
     </>
   );

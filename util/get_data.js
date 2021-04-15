@@ -46,6 +46,7 @@ export default async function launch(Username) {
   var icon = info.profileIconId;
   var level = info.summonerLevel;
   let info_account = JSON.parse(await get_info(url2(info_id, key)));
+  let flex = false;
   if (info_account.length !== 0) {
     info_account.map((dt) => {
       if (dt.queueType == "RANKED_SOLO_5x5") {
@@ -54,8 +55,12 @@ export default async function launch(Username) {
     });
     if (info_account[0].queueType != "RANKED_SOLO_5x5") {
       console.log("Loading ...");
-      return await launch(Username);
+      // console.log(info_account);
+      flex = true;
+      // return await launch(Username);
     }
+  } else {
+    console.log("THERE IS NO RANK HERE ");
   }
   let champs_info = JSON.parse(await get_info(url3(info.id, key)));
   // console.log(info_account);
@@ -90,7 +95,7 @@ export default async function launch(Username) {
   ];
 
   return {
-    data: info_account.length === 0 ? in_case : info_account,
+    data: flex ? in_case : info_account.length === 0 ? in_case : info_account,
     icon,
     level,
     champs_mystery,

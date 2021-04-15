@@ -73,12 +73,17 @@
   position: absolute;
   right: 4%;
   top: 30px;
+  cursor: pointer;
 }
 .subBtn:hover {
   background: var(--sky);
   border-color: var(--sky);
 }
 .loading {
-  height: 50%;
-  width: 20%;
+  height: auto;
+  width: 10%;
+  max-width: 30%;
+  left: 30px;
+  position: absolute;
+  bottom: 30px;
 }

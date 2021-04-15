@@ -12,7 +12,7 @@ function Modal({ show }) {
     setLoading(false);
     toast(
       <div className={styles.message}>
-        You have been <b>Added</b>
+        You have been <b>Added/Updated</b>
       </div>,
       {
         icon: <img src="/svgs/info.svg" alt="info" />,
