@@ -48,12 +48,16 @@ async function put_data(req, res, next) {
           console.log("Name here => ", _data.summonerName);
           req.db
             .collection("users")
-            .updateOne({ name: _data.summonerName }, { $set: obj }, (o, d) => {
-              if (o) throw o;
-              console.log("Refreshed Succ");
+            .updateOne(
+              { name: _data.summonerName.toLowerCase() },
+              { $set: obj },
+              (o, d) => {
+                if (o) throw o;
+                console.log("Refreshed Succ");
 
-              res.json({ done: "Refreshed" });
-            });
+                res.json({ done: "Refreshed" });
+              }
+            );
         } else {
           console.log('doesn"t exits');
           req.db.collection("users").insertOne(obj, (error, rex) => {
