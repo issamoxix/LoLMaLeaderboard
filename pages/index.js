@@ -18,6 +18,7 @@ import HomeComp from "../components/dt/pages/Home";
 import LeaderBoard from "../components/dt/pages/LeaderBoard";
 import MobileNav from "../components/dt/MobileNav";
 import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 function reducer(state, action) {
   switch (action.type) {
@@ -35,6 +36,10 @@ function dt() {
     comp: <HomeComp />,
     label: "Home",
   });
+  const router = useRouter();
+  const { query } = router;
+  const page = query.page || "H";
+  const count = parseInt(query.count || 1, 10);
   const [show, setShow] = useState(false);
   const [Mob, setM] = useState(false);
   const [toggle, settoggle] = useState(true);
@@ -52,6 +57,9 @@ function dt() {
   useEffect(() => {
     window.innerWidth <= 900 && setM(true);
   }, []);
+  useEffect(() => {
+    dispatch({ type: page });
+  }, [page]);
 
   return (
     <div className={styles.container}>

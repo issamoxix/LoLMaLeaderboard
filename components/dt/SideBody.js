@@ -1,13 +1,18 @@
+import { useRouter } from "next/router";
 import React from "react";
 import styles from "../../styles/dt/Home.module.css";
 
 function SideBody({ page, dis }) {
+  const router = useRouter();
+
   return (
     <div className={styles.SideBody}>
       <ul>
         <li
           className={`${styles.ListNav} ${page == "Home" && styles.activeNav}`}
-          onClick={() => dis({ type: "H" })}
+          onClick={() =>
+            router.push(`/?page=${"H"}`, undefined, { shallow: true })
+          }
         >
           Home
         </li>
@@ -15,7 +20,9 @@ function SideBody({ page, dis }) {
           className={`${styles.ListNav} ${
             page == "Ladder" && styles.activeNav
           }`}
-          onClick={() => dis({ type: "L" })}
+          onClick={() =>
+            router.push(`/?page=${"L"}`, undefined, { shallow: true })
+          }
         >
           LeaderBoard
         </li>
