@@ -20,9 +20,8 @@ function ChampLadderTable({ data, refresh, active = 1, loading, em = false }) {
             />{" "}
           </div>
         </th>
-        <th>Level</th>
-
         <th>ChampionPoints</th>
+        <th>Level</th>
       </tr>
       {em && (
         <tr>
