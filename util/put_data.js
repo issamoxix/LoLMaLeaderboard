@@ -31,7 +31,6 @@ async function put_data(req, res, next) {
       level: data.level,
       W: _data.wins,
       L: _data.losses,
-      ...data.champs_mystery,
     };
     insert_data(encode_utf8(req.query.name), obj.rank_all, obj.level);
     req.db

@@ -16,6 +16,7 @@ let url2 = (id, key) =>
 let url3 = (u_id, key) =>
   `https://euw1.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-summoner/${u_id}?api_key=${key}`;
 
+let url4;
 const get_info = async (url) => {
   let dataString = "";
   const response = await new Promise((resolve, reject) => {
@@ -35,7 +36,7 @@ const get_info = async (url) => {
   });
   return await response;
 };
-export default async function launch(Username) {
+export default async function launch(Username, Chmamp = false, ChampKey = 0) {
   var db = await mongoCl.connect(mgurl, { useUnifiedTopology: true });
   var dbo = db.db("lolrank");
   var akey = await dbo.collection("riot_api").find().toArray();
@@ -62,27 +63,22 @@ export default async function launch(Username) {
   } else {
     console.log("THERE IS NO RANK HERE ");
   }
-  let champs_info = JSON.parse(await get_info(url3(info.id, key)));
+  if (Chmamp) {
+    let champs_info = JSON.parse(await get_info(url3(info.id, key)));
+    for (let i in champs_info) {
+      if (champs_info[i]["championId"] == ChampKey) {
+        return { name: info.name.toLowerCase(), icon, ...champs_info[i] };
+      }
+    }
+  }
   // console.log(info_account);
   // console.log(champs_info.slice(0, 3));
-  let ch1 = champs_list[parseInt(champs_info[0].championId)];
-  let ch2 = champs_list[parseInt(champs_info[1].championId)];
-  let ch3 = champs_list[parseInt(champs_info[2].championId)];
-  let champs_mystery = {};
+  // let ch1 = champs_list[parseInt(champs_info[0].championId)];
+  // let ch2 = champs_list[parseInt(champs_info[1].championId)];
+  // let ch3 = champs_list[parseInt(champs_info[2].championId)];
+
   // champName with lvl
-  champs_mystery[ch1] = champs_info[0].championLevel;
 
-  champs_mystery[ch2] = champs_info[1].championLevel;
-
-  champs_mystery[ch3] = champs_info[2].championLevel;
-  // champName with Mp
-  champs_mystery[`${ch1}_sort`] = champs_info[0].championPoints;
-
-  champs_mystery[`${ch2}_sort`] = champs_info[1].championPoints;
-
-  champs_mystery[`${ch3}_sort`] = champs_info[2].championPoints;
-
-  // champs_info[2].championPoints,
   let in_case = [
     {
       summonerName: info.name,
@@ -98,6 +94,8 @@ export default async function launch(Username) {
     data: flex ? in_case : info_account.length === 0 ? in_case : info_account,
     icon,
     level,
-    champs_mystery,
   };
 }
+// launch("tooraaa", true, 432).then((d) => {
+//   console.log(d);
+// });

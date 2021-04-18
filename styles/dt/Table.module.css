@@ -50,7 +50,10 @@
   background-color: var(--comb);
   width: 6%;
 }
-
+.EmptyBuc {
+  color: #ddd;
+  text-align: center;
+}
 .Table tr td {
   background-color: var(--comb);
   /* display: flex; */

@@ -20,6 +20,9 @@ import MobileNav from "../components/dt/MobileNav";
 import { useEffect } from "react";
 import Router, { useRouter } from "next/router";
 import nProgress from "nprogress";
+import Champions from "../components/dt/pages/Champions";
+import Loading from "../components/dt/pages/Loading";
+import ChampLadder from "../components/dt/pages/ChampLadder";
 
 Router.onRouteChangeStart = (url) => {
   nProgress.start();
@@ -32,19 +35,25 @@ function reducer(state, action) {
       return { comp: <HomeComp />, label: "Home" };
     case "L":
       return { comp: <LeaderBoard />, label: "Ladder" };
+    case "C":
+      return { comp: <Champions />, label: "Champions" };
+    case "CL":
+      return { comp: <ChampLadder />, label: "Champions" };
+    case "Loading":
+      return { comp: <Loading />, label: "Loading ..." };
     default:
-      return { comp: <HomeComp />, label: "Home" };
+      return { comp: <Loading />, label: "Loading ..." };
   }
 }
 
 function dt() {
   const [{ comp, label }, dispatch] = useReducer(reducer, {
-    comp: <HomeComp />,
-    label: "Home",
+    comp: <Loading />,
+    label: "Loading ...",
   });
   const router = useRouter();
   const { query } = router;
-  const page = query.page || "H";
+  const page = query.page;
   const count = parseInt(query.count || 1, 10);
   const [show, setShow] = useState(false);
   const [Mob, setM] = useState(false);
@@ -59,9 +68,14 @@ function dt() {
     top: 0,
     display: !show && "none",
   });
-
   useEffect(() => {
     window.innerWidth <= 900 && setM(true);
+    console.log(page);
+
+    if (router.asPath == "/") {
+      router.push(`/?page=${"H"}`, undefined, { shallow: true });
+    }
+    dispatch({ type: page });
   }, []);
   useEffect(() => {
     dispatch({ type: page });

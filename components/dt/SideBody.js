@@ -26,6 +26,16 @@ function SideBody({ page, dis }) {
         >
           LeaderBoard
         </li>
+        <li
+          className={`${styles.ListNav} ${
+            page == "Champions" && styles.activeNav
+          }`}
+          onClick={() =>
+            router.push(`/?page=${"C"}`, undefined, { shallow: true })
+          }
+        >
+          Champions
+        </li>
       </ul>
     </div>
   );
