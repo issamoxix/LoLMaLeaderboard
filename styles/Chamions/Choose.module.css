@@ -8,6 +8,12 @@
   cursor: pointer;
   transition: box-shadow 0.3s linear;
 }
+@media (max-width: 900px) {
+  .ChampIconWrapper {
+    height: 60px;
+    width: 60px;
+  }
+}
 .ChampIconWrapper:hover {
   -webkit-box-shadow: 10px 10px 5px -6px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 10px 10px 5px -6px rgba(0, 0, 0, 0.75);
@@ -48,16 +54,21 @@
 .MainWrapper {
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   flex-wrap: wrap;
 }
 .ChampTitle {
-  color: var(--sky);
+  color: #fff;
   margin-bottom: 20px;
+}
+.Darkwrapper {
+  background-color: black;
+  height: 100%;
+  width: 100%;
 }
 .InputSum {
   border: none;
-  background-color: var(--bg);
+  background-color: #0f121de0;
   border-radius: 5px;
   padding: 14px;
   font-size: 17px;

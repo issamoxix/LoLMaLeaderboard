@@ -9,7 +9,9 @@ function Table({ data, refresh, active = 1, loading }) {
   return (
     <table className={styles.Table}>
       <tr className={styles.TR}>
-        <th>#</th>
+        <th>
+          <div className={styles.fTHeader}>#</div>
+        </th>
         <th>
           <div className={styles.itemsth}>
             <h3>Summoners </h3>
@@ -20,10 +22,18 @@ function Table({ data, refresh, active = 1, loading }) {
             />{" "}
           </div>
         </th>
-        <th>Tier</th>
-        <th>Lp</th>
-        <th>Level</th>
-        <th>{mob ? "W/R" : "Win Rate"}</th>
+        <th>
+          <h3>Tier</h3>
+        </th>
+        <th>
+          <h3>Lp</h3>
+        </th>
+        <th>
+          <h3>Level</h3>
+        </th>
+        <th>
+          <h3>{mob ? "W/R" : "Win Rate"}</h3>
+        </th>
       </tr>
       {loading && (
         <img

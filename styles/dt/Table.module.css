@@ -38,6 +38,10 @@
   transition: transform 0.3s linear;
 }
 
+.TR h3 {
+  font-size: 100%;
+}
+
 .itemsth img:active,
 .itemsth img:focus {
   transform: scale(0.9);
@@ -115,4 +119,25 @@
 }
 .pag ul li:hover {
   filter: brightness(1);
+}
+
+@media (max-width: 750px) {
+  .itemsth img {
+    width: 18%;
+  }
+  .TR:first-child,
+  .TR th:first-child,
+  .TR th:last-child {
+    border-radius: 0px;
+  }
+}
+@media (max-width: 900px) {
+  .fTHeader {
+    width: 9vw;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }

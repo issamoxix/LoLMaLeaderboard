@@ -7,6 +7,7 @@ import SquareImg from "../Champions/SquareImg";
 import styles from "../../../styles/Chamions/Choose.module.css";
 
 import NasCom from "../NasCom";
+import Infos from "../Infos";
 function ChampLadder() {
   const [_data, setData] = useState();
   const [inpt, setInpt] = useState();
@@ -45,6 +46,7 @@ function ChampLadder() {
     const json = await res.json();
     const { done } = json;
     setintitre(done);
+    get_Data();
   };
   useEffect(() => {
     if (router.asPath == "/?page=CL") {
@@ -62,10 +64,11 @@ function ChampLadder() {
   return (
     <>
       <NasCom>
-        <h1 className={styles.ChampTitle}>{title}</h1>
-        {icon && <SquareImg ChampName={icon} Cid={champId} />}
+        <Infos />
       </NasCom>
-      <NasCom>
+      <NasCom
+        url={`http://lolg-cdn.porofessor.gg/img/banners/champion-banners/${champId}.jpg`}
+      >
         <h3 className={styles.ChampTitle}>Register here</h3>
         <form
           className={styles.addForm}

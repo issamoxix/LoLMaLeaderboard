@@ -147,7 +147,7 @@ function dt() {
         ></div>
       )}
       <div
-        style={{ transform: Mob && toggle && "translateX(-100%)" }}
+        style={{ transform: Mob && !toggle && "translateX(0%)" }}
         className={`${styles.sideBar} `}
       >
         <SideHeader></SideHeader>

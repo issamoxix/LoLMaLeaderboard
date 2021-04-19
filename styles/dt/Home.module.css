@@ -160,7 +160,7 @@
 @media (max-width: 900px) {
   .sideBar {
     /* display: none; */
-    transform: translateX(0%);
+    transform: translateX(-100%);
     flex: 1;
     width: 50vw;
     z-index: 50;
