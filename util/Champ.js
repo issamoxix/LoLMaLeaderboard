@@ -65,6 +65,24 @@ async function insertchamp(req, res, next) {
           res.json({ done: "Empty" });
         }
       });
+  } else if (parseInt(req.query.code) == 2) {
+    // var replace = `/${req.query.q}/`;
+    // var re = new RegExp(replace, "g");
+    req.db
+      .collection("ChampionList")
+      .find(
+        { name: { $regex: new RegExp(req.query.q, "i") } },
+        { $exists: true }
+      )
+
+      .toArray((e, doc) => {
+        if (e) throw e;
+        if (doc.length != 0) {
+          res.json(doc);
+        } else {
+          res.json([]);
+        }
+      });
   } else {
     res.json({ salam: "wsalam" });
   }
