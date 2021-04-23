@@ -120,6 +120,10 @@
 .pag ul li:hover {
   filter: brightness(1);
 }
+.sumplayerimg {
+  height: 100%;
+  width: 9%;
+}
 
 @media (max-width: 750px) {
   .itemsth img {
@@ -131,6 +135,7 @@
     border-radius: 0px;
   }
 }
+
 @media (max-width: 900px) {
   .fTHeader {
     width: 9vw;
@@ -139,5 +144,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+  .sumplayerimg {
+    width: 13%;
   }
 }

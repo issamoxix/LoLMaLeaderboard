@@ -54,6 +54,7 @@ function ChampLadderTable({ data, refresh, active = 1, loading, em = false }) {
                 {" "}
                 <img
                   src={`https://opgg-static.akamaized.net/images/profile_icons/profileIcon${d.icon}.jpg?image=q_auto:best&v=1518361200`}
+                  style={{ width: "40px" }}
                 />
                 <p> {d.name} </p>
               </div>
