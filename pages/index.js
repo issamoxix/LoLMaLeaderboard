@@ -102,7 +102,7 @@ function dt() {
   return (
     <div className={styles.container}>
       <Head>
-        <script type="text/javascript" src="/static/pix.js"></script>
+        {/* <script type="text/javascript" src="/static/pix.js"></script> */}
 
         <meta
           name="description"
