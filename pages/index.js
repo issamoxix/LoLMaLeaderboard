@@ -23,7 +23,6 @@ import nProgress from "nprogress";
 import Champions from "../components/dt/pages/Champions";
 import Loading from "../components/dt/pages/Loading";
 import ChampLadder from "../components/dt/pages/ChampLadder";
-import ReactPixel from "react-facebook-pixel";
 
 Router.onRouteChangeStart = (url) => {
   nProgress.start();
@@ -66,12 +65,6 @@ src="https://www.facebook.com/tr?id=1439439406396220&ev=PageView&noscript=1"
 <!-- End Facebook Pixel Code --> */
 }
 function dt() {
-  const options = {
-    autoConfig: true, // set pixel's autoConfig. More info: https://developers.facebook.com/docs/facebook-pixel/advanced/
-    debug: false, // enable logs
-  };
-  ReactPixel.init("1439439406396220", options);
-  ReactPixel.pageView();
   const [{ comp, label }, dispatch] = useReducer(reducer, {
     comp: <Loading />,
     label: "Loading ...",
@@ -109,6 +102,8 @@ function dt() {
   return (
     <div className={styles.container}>
       <Head>
+        <script type="text/javascript" src="/static/pix.js"></script>
+
         <meta
           name="description"
           content="League of legends Moroccan Solo Q Leaderboard , ranking top Moroccan Players"
