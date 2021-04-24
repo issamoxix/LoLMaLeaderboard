@@ -10,7 +10,7 @@ function MyApp({ Component, pageProps }) {
       .then((ReactPixel) => {
         ReactPixel.init("1439439406396220");
         ReactPixel.pageView();
-
+        ReactPixel.track({ test_event_code: "TEST9005" });
         router.events.on("routeChangeComplete", () => {
           ReactPixel.pageView();
         });
