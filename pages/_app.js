@@ -1,6 +1,7 @@
 import { useEffect } from "react";
-import "../styles/globals.css";
 import { useRouter } from "next/router";
+import "../styles/globals.css";
+import { PIXEL_ID } from "../Dataenv";
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
@@ -8,9 +9,8 @@ function MyApp({ Component, pageProps }) {
     import("react-facebook-pixel")
       .then((x) => x.default)
       .then((ReactPixel) => {
-        ReactPixel.init("1439439406396220");
+        ReactPixel.init(PIXEL_ID);
         ReactPixel.pageView();
-        ReactPixel.track({ test_event_code: "TEST9005" });
         router.events.on("routeChangeComplete", () => {
           ReactPixel.pageView();
         });
