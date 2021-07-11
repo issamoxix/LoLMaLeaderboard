@@ -159,6 +159,11 @@ function dt() {
           integrity="sha512-42kB9yDlYiCEfx2xVwq0q7hT4uf26FUgSIZBK8uiaEnTdShXjwr8Ip1V4xGJMg3mHkUt9nNuTDxunHF0/EgxLQ=="
           crossorigin="anonymous"
         />
+        <script
+          data-ad-client="ca-pub-7223878406940983"
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+        ></script>
       </Head>
       {!toggle && (
         <div
