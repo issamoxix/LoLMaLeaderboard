@@ -48,6 +48,28 @@
 }
 .SideBody ul {
 }
+.showMore {
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border: none;
+  font-weight: bold;
+  margin-top: 10px;
+  border-radius: 9px;
+  padding: 13px;
+  width: 20%;
+  margin-left: auto;
+  margin-right: auto;
+  cursor: pointer;
+  border: 2px solid var(--bg);
+  background-color: var(--sky);
+  z-index: 1;
+  color: #fff;
+  transition: background 0.3s linear;
+  display: block;
+  transition: border 0.7s linear;
+}
+.showMore:hover {
+  border-color: lightgray;
+}
 .ListNav {
   color: #242941;
   font-weight: bold;

@@ -3,6 +3,7 @@ import IconsWrapper from "../Champions/IconsWrapper";
 import SquareImg from "../Champions/SquareImg";
 import Mcom from "../Mcom";
 import styles from "../../../styles/Chamions/Choose.module.css";
+import Head from "next/dist/next-server/lib/head";
 
 function Champions() {
   const [data, setData] = useState([]);
@@ -32,6 +33,9 @@ function Champions() {
   }, []);
   return (
     <>
+      <Head>
+        <title>Champions</title>
+      </Head>
       <Mcom>
         {/* <IconsWrapper>{Items.map((d) => d)}</IconsWrapper> */}
         <input

@@ -1,13 +1,35 @@
 import React, { useEffect, useState } from "react";
 import styles from "../../styles/dt/Table.module.css";
+import toast, { Toaster } from "react-hot-toast";
+
 function Table({ data, refresh, active = 1, loading }) {
   const [mob, setMob] = useState(false);
+  const [loadingx, setLoading] = useState(false);
   useEffect(() => {
     window.innerWidth <= 900 && setMob(true);
   }, []);
-
+  const handleAdd = async (input) => {
+    setLoading(true);
+    const res = await fetch(`/api/add?name=${input}`);
+    setLoading(false);
+    toast(
+      <div>
+        <b>Refreshed</b>
+      </div>,
+      {
+        icon: <img src="/svgs/info.svg" alt="info" />,
+        style: {
+          borderRadius: "5px",
+          background: "#ddd",
+          color: "#000",
+        },
+      }
+    );
+    refresh((active - 1) * 10);
+  };
   return (
     <table className={styles.Table}>
+      <Toaster />
       <tr className={styles.TR}>
         <th>
           <div className={styles.fTHeader}>#</div>
@@ -47,7 +69,7 @@ function Table({ data, refresh, active = 1, loading }) {
           <tr>
             <td>{key + 1 + 10 * (active - 1)} </td>
 
-            <td>
+            <td onClick={() => handleAdd(d.name)} style={{ cursor: "pointer" }}>
               <div className={styles.infowrapper}>
                 {" "}
                 <img
