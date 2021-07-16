@@ -1,10 +1,17 @@
 import React, { useState } from "react";
 import styles from "../../styles/dt/Modal.module.css";
 import toast, { Toaster } from "react-hot-toast";
+import * as gtag from "../../lib/gtag";
 
 function Modal({ show }) {
   const [input, setInput] = useState();
   const [loading, setLoading] = useState(false);
+  const handleevent = (name) => {
+    gtag.event({
+      action: "Register",
+      value: name,
+    });
+  };
   const handleAdd = async () => {
     setLoading(true);
     const res = await fetch(`/api/add?name=${input}`);
@@ -48,7 +55,7 @@ function Modal({ show }) {
             onChange={(e) => setInput(e.target.value)}
             className={styles.InputSum}
           />
-          <button className={styles.subBtn}>
+          <button className={styles.subBtn} onCLick={() => handleevent(input)}>
             {" "}
             {loading ? "Loading ..." : "Add"}{" "}
           </button>
