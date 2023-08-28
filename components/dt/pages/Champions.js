@@ -3,7 +3,7 @@ import IconsWrapper from "../Champions/IconsWrapper";
 import SquareImg from "../Champions/SquareImg";
 import Mcom from "../Mcom";
 import styles from "../../../styles/Chamions/Choose.module.css";
-import Head from "next/dist/next-server/lib/head";
+import Head from "next/head";
 
 function Champions() {
   const [data, setData] = useState([]);

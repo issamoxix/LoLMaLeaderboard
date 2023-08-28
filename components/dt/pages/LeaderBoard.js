@@ -5,7 +5,7 @@ import Pagnition from "../Pagnition";
 import Table from "../Table";
 import styles from "../../../styles/dt/Table.module.css";
 import { useRouter } from "next/router";
-import Head from "next/dist/next-server/lib/head";
+import Head from "next/head";
 function LeaderBoard() {
   const [data, setData] = useState();
   const [active, setActive] = useState(1);
