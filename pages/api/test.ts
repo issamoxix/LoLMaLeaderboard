@@ -3,5 +3,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default (req: NextApiRequest, res: NextApiResponse) => {
-  res.status(200).json({ message: 'Hello from the API!' });
+  let secret = process.env.MGURL || "empty"
+  res.status(200).json({ message: `Hello from the API! ${secret}` });
 };
