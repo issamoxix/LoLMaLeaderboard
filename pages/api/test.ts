@@ -1,8 +1,15 @@
 // pages/api/hello.ts
 
 import { NextApiRequest, NextApiResponse } from 'next';
+import nextConnect from 'next-connect';
+import middleware from "../../util/test"
 
-export default (req: NextApiRequest, res: NextApiResponse) => {
-  let secret = process.env.MGURL || "empty"
-  res.status(200).json({ message: `Hello from the API! ${secret}` });
-};
+const handler = nextConnect();
+
+handler.use(middleware);
+
+
+handler.get(async (req, res) => {
+});
+
+export default handler;
