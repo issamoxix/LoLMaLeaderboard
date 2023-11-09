@@ -21,18 +21,18 @@ const Navbar = ({ refresh, setRefresh }) => {
         <nav className={styles.nav}>
           <ul className={styles.nav_list}>
             <li className={styles.list_item}>
-              <Link href="/">
-                <a className={styles.nav_link}>Home</a>
+              <Link className={styles.nav_link} href="/">
+                Home
               </Link>
             </li>
             <li className={styles.list_item}>
-              <Link href="/ranking">
-                <a className={styles.nav_link}>Ranking</a>
+              <Link className={styles.nav_link} href="/ranking">
+                Ranking
               </Link>
             </li>
             <li className={styles.list_item}>
-              <Link href="/">
-                <a className={styles.nav_link}>Champions</a>
+              <Link className={styles.nav_link} href="/">
+                Champions
               </Link>
             </li>
           </ul>

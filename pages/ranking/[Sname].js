@@ -13,7 +13,6 @@ export default function Srank({ sdata, tdata }) {
   const { Sname } = router.query;
   const name = Sname;
   const data = sdata;
-
   // const data = {
   //   Mrank: 10,
   //   lp: 70,
@@ -29,12 +28,10 @@ export default function Srank({ sdata, tdata }) {
     <>
       {/* S stand for Summoner */}
       <Head>
-        <title> {name && name.toUpperCase()} Rank </title>
+        <title> {name && name.toUpperCase()} {data.tier} {data.rank}</title>
         <meta
           name="description"
-          content={`${data.name && data.name.toUpperCase()} Rank ${
-            data.Mrank
-          } In Morocco League of legends`}
+          content={`${data.name && data.name.toUpperCase()} ${data.tier} ${data.rank} In The Moroccan League`}
         />
         <meta
           name="keywords"
@@ -44,7 +41,7 @@ export default function Srank({ sdata, tdata }) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta
           property="og:image"
-          content={`http://ddragon.leagueoflegends.com/cdn/11.3.1/img/profileicon/${data.icon}.png`}
+          content={`https://static.bigbrain.gg/assets/lol/riot_static/13.22.1/img/profileicon/${data.icon}.png`}
         ></meta>
       </Head>
       <Navbar />
@@ -52,7 +49,7 @@ export default function Srank({ sdata, tdata }) {
         <div className={styles.detail}>
           <img
             className={styles.Sicon}
-            src={`http://ddragon.leagueoflegends.com/cdn/11.3.1/img/profileicon/${data.icon}.png`}
+            src={`https://static.bigbrain.gg/assets/lol/riot_static/13.22.1/img/profileicon/${data.icon}.png`}
             alt="league of legends icon"
           />
           <div className={styles.Slevel}>
@@ -97,7 +94,7 @@ export default function Srank({ sdata, tdata }) {
                 tdata.map((d, k) => (
                   <tr key={k + 1}>
                     <td style={{ verticalAlign: "middle" }}>
-                      {data.Mrank + k}
+                      {k + 1}
                     </td>
                     <td>
                       <h4
@@ -108,7 +105,7 @@ export default function Srank({ sdata, tdata }) {
                         }}
                       >
                         <Avatar
-                          src={`http://ddragon.leagueoflegends.com/cdn/11.3.1/img/profileicon/${d.icon}.png`}
+                          src={`https://static.bigbrain.gg/assets/lol/riot_static/13.22.1/img/profileicon/${d.icon}.png`}
                         />
                         <span style={{ marginRight: "10px" }}></span>
                         {d.name}

@@ -84,18 +84,14 @@ export default function Table_Data({ limite, tresh, setTresh }) {
                     }}
                   >
                     <Avatar
-                      src={`http://ddragon.leagueoflegends.com/cdn/11.3.1/img/profileicon/${d.icon}.png`}
+                      src={`https://static.bigbrain.gg/assets/lol/riot_static/13.22.1/img/profileicon/${d.icon}.png`}
                     />
                     <span style={{ marginRight: "10px" }}></span>
-                    <Link href={`/ranking/${d.name}`}>
-                      <a
-                        style={{
+                    <Link style={{
                           color: "initial",
                           textDecorationStyle: "none",
-                        }}
-                      >
+                        }} href={`/ranking/${d.name}`}>
                         {d.name}
-                      </a>
                     </Link>
                   </h4>{" "}
                 </td>
