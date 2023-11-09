@@ -24,14 +24,17 @@ export default function Srank({ sdata, tdata }) {
   //   tier:
   //     "https://img.rankedboost.com/wp-content/uploads/2014/09/Season_2019_-_Gold_1.png",
   // };
+  const title = `${name.toUpperCase()} ${data.tier} ${data.rank}`;
   return (
     <>
       {/* S stand for Summoner */}
       <Head>
-        <title> {name && name.toUpperCase()} {data.tier} {data.rank}</title>
+        <title>{name && title}</title>
         <meta
           name="description"
-          content={`${data.name && data.name.toUpperCase()} ${data.tier} ${data.rank} In The Moroccan League`}
+          content={`${data.name && data.name.toUpperCase()} ${data.tier} ${
+            data.rank
+          } In The Moroccan League`}
         />
         <meta
           name="keywords"
@@ -93,9 +96,7 @@ export default function Srank({ sdata, tdata }) {
               {tdata ? (
                 tdata.map((d, k) => (
                   <tr key={k + 1}>
-                    <td style={{ verticalAlign: "middle" }}>
-                      {k + 1}
-                    </td>
+                    <td style={{ verticalAlign: "middle" }}>{k + 1}</td>
                     <td>
                       <h4
                         style={{
