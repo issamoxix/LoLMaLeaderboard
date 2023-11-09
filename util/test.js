@@ -11,7 +11,7 @@ const client = new MongoClient(url, {
 
 
 async function ttt(req, res, next) {
-    if (!client.isConnected()) await client.connect();
+    await client.connect();
     await res.status(200).json({
         "test": `test the ${url}`,
         "body2": await client.db("lolrank")
