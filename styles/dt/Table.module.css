@@ -77,8 +77,8 @@
   /* height: 100%; */
 }
 .Table tr td:nth-child(2) img {
-  border-radius: 50%;
-  width: 13%;
+  /* border-radius: 50%; */
+  width: 11%;
   height: 100%;
   margin: 0px 6px;
 }

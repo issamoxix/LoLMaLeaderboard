@@ -25,6 +25,10 @@
     "react-hot-toast": "^1.0.2",
     "react-spring": "^9.1.0",
     "reactjs-popup": "^2.0.4",
-    "redis": "^3.0.2"
+    "redis": "^3.0.2",
+    "yarn": "^1.22.19"
+  },
+  "devDependencies": {
+    "typescript": "5.2.2"
   }
 }

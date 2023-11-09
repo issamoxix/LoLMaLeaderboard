@@ -1,7 +1,8 @@
 const https = require("https");
+require('dotenv').config();
 
 const champs_list = require("./champ.json");
-const mgurl = "mongodb://localhost:27017/";
+const mgurl = process.env.MGURL || "mongodb://localhost:27017/";
 
 const mongoCl = require("mongodb").MongoClient;
 

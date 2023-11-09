@@ -3,8 +3,9 @@ import nextConnect from "next-connect";
 import launch from "./get_data";
 import rank_calc from "./rank_cal";
 import insert_data from "./redis_db";
+require('dotenv').config();
 
-const url = "mongodb://localhost:27017/";
+const url = process.env.MGURL || "mongodb://localhost:27017/";
 const client = new MongoClient(url, {
   useNewUrlParser: true,
   useUnifiedTopology: true,

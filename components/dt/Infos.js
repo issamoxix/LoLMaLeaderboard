@@ -8,9 +8,7 @@ function Infos() {
     <div className={styles.InfosContainer}>
       <h2 className={styles.Infotitle}>lolrankmaroc.live v0.0.1 </h2>
       <p className={styles.para}>
-        Im still working on this website, so if there are any bugs or feedback,
-        you can contact me on my Socials or add me on Discord Issam#6576 , if
-        you are interested and want to contribute Click the github icon below
+        I'm still making this website better. If you find any problems or have suggestions, let me know on my socials or add me on Discord at Issam#6576. If you want to help, click the GitHub icon below!
       </p>
       <div className={styles.Socials}>
         <a href="https://github.com/issamoxix/LoLMaLeaderboard">

@@ -73,7 +73,7 @@ function Table({ data, refresh, active = 1, loading }) {
               <div className={styles.infowrapper}>
                 {" "}
                 <img
-                  src={`https://opgg-static.akamaized.net/images/profile_icons/profileIcon${d.icon}.jpg?image=q_auto:best&v=1518361200`}
+                  src={`https://static.bigbrain.gg/assets/lol/riot_static/13.22.1/img/profileicon/${d.icon}.png`}
                 />
                 <p> {d.name} </p>
               </div>
