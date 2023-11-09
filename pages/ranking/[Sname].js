@@ -154,13 +154,13 @@ export default function Srank({ sdata, tdata }) {
 }
 export async function getServerSideProps({ params }) {
   const req = await fetch(
-    `http://localhost:3000/api/get_sum?name=${params.Sname}`
+    `https://lolma.vercel.app/api/get_sum?name=${params.Sname}`
   );
 
   const sdata = await req.json();
 
   const req2 = await fetch(
-    `http://localhost:3000/api/get_range?rank_all=${sdata.rank_all}&level=${sdata.level}`
+    `https://lolma.vercel.app/api/get_range?rank_all=${sdata.rank_all}&level=${sdata.level}`
   );
   const tdata = await req2.json();
 
