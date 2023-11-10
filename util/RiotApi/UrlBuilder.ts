@@ -1,4 +1,4 @@
-class RiotApiUrlBuilder {
+export class RiotApiUrlBuilder {
     private baseUrl: string;
   
     constructor(apiRegion: string, apiKey: string) {

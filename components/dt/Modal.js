@@ -17,6 +17,7 @@ function Modal({ show }) {
     const res = await fetch(`/api/add?name=${input}`);
     setInput("");
     setLoading(false);
+    show(false)
     toast(
       <div className={styles.message}>
         You have been <b>Added/Updated</b>
