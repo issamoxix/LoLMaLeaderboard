@@ -12,11 +12,12 @@ const client = new MongoClient(url, {
 });
 async function insertchamp(req, res, next) {
   if (!client.isConnected()) await client.connect();
+  let db = await client.db("lolrank");
   req.dbClient = client;
   function encode_utf8(s) {
     return unescape(encodeURIComponent(s));
   }
-  req.db = client.db("lolrank");
+  req.db = await client.db("lolrank");
   if (parseInt(req.query.code) == 1) {
     if (!req.query.name) {
       res.json({ done: "Name ?!" });
@@ -67,23 +68,17 @@ async function insertchamp(req, res, next) {
       .skip(req.query.skip ? parseInt(req.query.skip) : 0)
       .sort({ championPoints: -1 })
       .toArray();
-    res.json({ data: req.db, ct: req.ct})
+    res.json({ data: req.db, ct: req.ct })
   } else if (parseInt(req.query.code) == 2) {
-    req.db
+    let result = await db
       .collection("ChampionList")
       .find(
         { name: { $regex: new RegExp(req.query.q, "i") } },
         { $exists: true }
       )
-
-      .toArray((e, doc) => {
-        if (e) throw e;
-        if (doc.length != 0) {
-          res.json(doc);
-        } else {
-          res.json([]);
-        }
-      });
+      .toArray();
+    // res.json([]);
+    await res.json(result)
   } else {
     res.json({ salam: "wsalam" });
   }
