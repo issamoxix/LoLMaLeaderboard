@@ -54,12 +54,12 @@ async function insertchamp(req, res, next) {
     );
   } else if (parseInt(req.query.code) == 0) {
     let cId = parseInt(req.query.Cid);
-    req.ct = client
+    req.ct = await client
       .db("lolrank")
       .collection("Champs")
       .find({ championId: cId }, { $exists: true })
       .count();
-    req.db = client
+    req.db = await client
       .db("lolrank")
       .collection("Champs")
       .find({ championId: cId }, { $exists: true })
@@ -67,9 +67,8 @@ async function insertchamp(req, res, next) {
       .skip(req.query.skip ? parseInt(req.query.skip) : 0)
       .sort({ championPoints: -1 })
       .toArray();
+    res.json({ data: req.db, ct: req.ct})
   } else if (parseInt(req.query.code) == 2) {
-    // var replace = `/${req.query.q}/`;
-    // var re = new RegExp(replace, "g");
     req.db
       .collection("ChampionList")
       .find(
