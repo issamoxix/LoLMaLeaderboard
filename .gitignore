@@ -34,7 +34,6 @@ yarn-error.log*
 
 #prod
 test.*
-.env
 
 
 # vercel
@@ -63,3 +62,4 @@ amplifytools.xcconfig
 1612619771147.zip
 1612619965777.zip
 amplify/
+.env
