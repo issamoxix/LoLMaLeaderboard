@@ -1,78 +1,65 @@
 import { MongoClient } from "mongodb";
 import nextConnect from "next-connect";
 import launch from "./get_data";
-import rank_calc from "./rank_cal";
-import insert_data from "./redis_db";
-require('dotenv').config();
+import rankCalc from "./rank_cal";
+import dotenv from 'dotenv';
 
+dotenv.config();
+
+const encodeUtf8 = (s) => unescape(encodeURIComponent(s));
 
 const url = process.env.MGURL || "mongodb://localhost:27017/";
 const client = new MongoClient(url, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
-async function put_data(req, res, next) {
-  if (!client.isConnected()) await client.connect();
-  req.dbClient = client;
-  function encode_utf8(s) {
-    return unescape(encodeURIComponent(s));
-  }
-  req.db = client.db("lolrank");
-  launch(encode_utf8(req.query.name)).then((data) => {
-    let _data = data.data[0];
-    // console.log(encode_utf8(req.query.name));
-    console.log(_data.summonerName);
 
-    var obj = {
+async function putData(req, res, next) {
+  try {
+    if (!client.isConnected()) await client.connect();
+    const db = await client.db("lolrank");
+
+    const summonerName = encodeUtf8(req.query.name);
+    const data = await launch(summonerName);
+    const _data = data.data[0];
+
+    const obj = {
       name: _data.summonerName && _data.summonerName.toLowerCase(),
       tier: _data.tier,
       rank: _data.rank,
-      rank_all: rank_calc(_data.tier, _data.rank, parseInt(_data.leaguePoints)),
+      rankAll: rankCalc(_data.tier, _data.rank, parseInt(_data.leaguePoints)),
       lp: _data.leaguePoints,
       icon: data.icon,
       level: data.level,
       W: _data.wins,
       L: _data.losses,
+      champsInfo: data.champs_info
     };
-    insert_data(encode_utf8(req.query.name), obj.rank_all, obj.level);
-    req.db
-      .collection("users")
-      .find(
-        { name: _data.summonerName && _data.summonerName.toLowerCase() },
-        { $exists: true }
-      )
-      .toArray((e, doc) => {
-        if (e) throw e;
-        if (doc.length != 0) {
-          console.log("exists !!");
-          console.log(obj);
-          console.log("Name here => ", _data.summonerName);
-          req.db
-            .collection("users")
-            .updateOne(
-              { name: _data.summonerName.toLowerCase() },
-              { $set: obj },
-              (o, d) => {
-                if (o) throw o;
-                console.log("Refreshed Succ");
 
-                res.json({ done: "Refreshed" });
-              }
-            );
-        } else {
-          console.log('doesn"t exits');
-          req.db.collection("users").insertOne(obj, (error, rex) => {
-            if (error) throw error;
-            console.log("added Succ ");
+    const existingSummoner = await db.collection("users").findOne({ name: obj.name });
 
-            res.json({ done: "Added" });
-          });
-        }
-      });
-  });
+    if (existingSummoner) {
+      await db.collection("users").updateOne({ name: obj.name }, { $set: obj });
+      res.json({ done: "Refreshed" });
+    } else {
+      await db.collection("users").insertOne(obj);
+      if (obj.champsInfo.length > 0){
+        obj.champsInfo.map(async (champ)=> { 
+          await db.collection("Champs").insertOne({name:obj.name,icon:obj.icon, ...champ})
+        })
+      }
+      res.json({ done: "Added" });
+    }
 
-  return next();
+  } catch (error) {
+    console.error("Error processing data:", error);
+    await res.json({ error: error })
+  } finally {
+    next();
+  }
 }
+
 const middleware = nextConnect();
-middleware.use(put_data);
+middleware.use(putData);
+
 export default middleware;
