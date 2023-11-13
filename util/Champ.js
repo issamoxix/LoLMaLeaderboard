@@ -1,10 +1,11 @@
 import { MongoClient } from "mongodb";
 import nextConnect from "next-connect";
 import launch from "./get_data";
-import rank_calc from "./rank_cal";
-import insert_data from "./redis_db";
+import fs from "fs/promises";
+import championList from "./champ.json";
 require('dotenv').config();
 
+const encode_utf8 = (s) => unescape(encodeURIComponent(s));
 const url = process.env.MGURL || "mongodb://localhost:27017/";
 const client = new MongoClient(url, {
   useNewUrlParser: true,
@@ -13,18 +14,15 @@ const client = new MongoClient(url, {
 async function insertchamp(req, res, next) {
   if (!client.isConnected()) await client.connect();
   let db = await client.db("lolrank");
-  req.dbClient = client;
-  function encode_utf8(s) {
-    return unescape(encodeURIComponent(s));
-  }
-  req.db = await client.db("lolrank");
+
   if (parseInt(req.query.code) == 1) {
     if (!req.query.name) {
-      res.json({ done: "Name ?!" });
+      res.json({ done: "name not provided" });
     }
+
     launch(encode_utf8(req.query.name), true, parseInt(req.query.ckey)).then(
       (data) => {
-        req.db
+        db
           .collection("Champs")
           .find(
             { championId: data.championId, name: data.name },
@@ -33,7 +31,7 @@ async function insertchamp(req, res, next) {
           .toArray((e, doc) => {
             if (e) throw e;
             if (doc.length != 0) {
-              req.db
+              db
                 .collection("Champs")
                 .updateOne(
                   { championId: data.championId, name: data.name },
@@ -44,7 +42,7 @@ async function insertchamp(req, res, next) {
                   }
                 );
             } else {
-              req.db.collection("Champs").insertOne(data, (error, rex) => {
+              db.collection("Champs").insertOne(data, (error, rex) => {
                 if (error) throw error;
 
                 res.json({ done: "Added" });
@@ -60,7 +58,7 @@ async function insertchamp(req, res, next) {
       .collection("Champs")
       .find({ championId: cId }, { $exists: true })
       .count();
-    req.db = await client
+    db = await client
       .db("lolrank")
       .collection("Champs")
       .find({ championId: cId }, { $exists: true })
@@ -68,17 +66,10 @@ async function insertchamp(req, res, next) {
       .skip(req.query.skip ? parseInt(req.query.skip) : 0)
       .sort({ championPoints: -1 })
       .toArray();
-    res.json({ data: req.db, ct: req.ct })
+    res.json({ data: db, ct: req.ct })
   } else if (parseInt(req.query.code) == 2) {
-    let result = await db
-      .collection("ChampionList")
-      .find(
-        { name: { $regex: new RegExp(req.query.q, "i") } },
-        { $exists: true }
-      )
-      .toArray();
-    // res.json([]);
-    await res.json(result)
+
+    await res.json(championList)
   } else {
     res.json({ salam: "wsalam" });
   }
