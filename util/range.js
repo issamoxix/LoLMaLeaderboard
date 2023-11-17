@@ -3,7 +3,6 @@ import { MongoClient } from "mongodb";
 import nextConnect from "next-connect";
 require('dotenv').config();
 
-// const url ="mongodb+srv://admin1:issamroot123@lolma.aan0s.mongodb.net/users?retryWrites=true&w=majority";
 const url = process.env.MGURL || "mongodb://localhost:27017/";
 const client = new MongoClient(url, {
   useNewUrlParser: true,
