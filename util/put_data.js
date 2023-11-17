@@ -27,7 +27,7 @@ async function putData(req, res, next) {
       name: _data.summonerName && _data.summonerName.toLowerCase(),
       tier: _data.tier,
       rank: _data.rank,
-      rankAll: rankCalc(_data.tier, _data.rank, parseInt(_data.leaguePoints)),
+      rank_all: rankCalc(_data.tier, _data.rank, parseInt(_data.leaguePoints)),
       lp: _data.leaguePoints,
       icon: data.icon,
       level: data.level,

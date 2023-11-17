@@ -18,6 +18,7 @@ export default function rank_calc(tier, rank, lp) {
       break;
     case "PLATINUM":
       rank_all += 50000;
+      break;
     case "GOLD":
       rank_all += 40000;
       break;
