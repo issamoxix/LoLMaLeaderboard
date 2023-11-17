@@ -2,17 +2,10 @@ import { MongoClient } from "mongodb";
 import nextConnect from "next-connect";
 import launch from "./get_data";
 import rankCalc from "./rank_cal";
-import dotenv from 'dotenv';
-
-dotenv.config();
+import databaseHandler from "./db/database";
 
 const encodeUtf8 = (s: string) => unescape(encodeURIComponent(s));
 
-const url: string = process.env.MGURL || "mongodb://localhost:27017/";
-const client: MongoClient = new MongoClient(url, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
 
 interface ChampionInfo {
   name: string;
@@ -43,7 +36,7 @@ interface UserData {
 
 async function putData(req: any, res: any, next: any) {
   try {
-    if (!client.isConnected()) await client.connect();
+    const client: MongoClient = await databaseHandler()
     const db = client.db("lolrank");
 
     const summonerName: string = encodeUtf8(req.query.name);

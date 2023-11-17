@@ -64,22 +64,22 @@ function HomeComp() {
 
         <meta
           name="image"
-          content="https://lolrankmaroc.live/images/banner.jpg"
+          content="https://lolma.vercel.app/images/banner.jpg"
         />
         <meta
           property="og:image"
-          content="https://lolrankmaroc.live/images/banner.jpg"
+          content="https://lolma.vercel.app/images/banner.jpg"
         />
         <meta
           name="twitter:image"
-          content="https://lolrankmaroc.live/images/banner.jpg"
+          content="https://lolma.vercel.app/images/banner.jpg"
         ></meta>
 
         <meta property="og:title" content="lolrankmaroc.live" />
         <meta name="twitter:title" content="lolrankmaroc.live" />
 
         <meta property="og:type" content="article" />
-        <meta property="og:url" content="https://lolrankmaroc.live/" />
+        <meta property="og:url" content="https://lolma.vercel.app/" />
         <meta
           property="og:description"
           content="league of legends,lolma,lol Maroc, league of legends Maroc, Moroccan Leaderboard , Top Morrcan Player"

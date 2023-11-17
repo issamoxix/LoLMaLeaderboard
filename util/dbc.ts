@@ -1,25 +1,17 @@
 import { MongoClient } from "mongodb";
 import nextConnect from "next-connect";
 import { NextApiRequest, NextApiResponse } from "next";
-import dotenv from 'dotenv';
+import databaseHandler from "./db/database";
 
-dotenv.config();
-
-const databaseUrl: string = process.env.MGURL || "mongodb://localhost:27017/";
-const databaseClient: MongoClient = new MongoClient(databaseUrl, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
 
 interface UserData {
   rank_all: number;
   level: number;
 }
 
-async function databaseHandler(req: NextApiRequest, res: NextApiResponse, next: any) {
+async function getSummoners(req: NextApiRequest, res: NextApiResponse, next: any) {
   try {
-    if (!databaseClient.isConnected()) await databaseClient.connect();
-
+    const databaseClient: MongoClient = await databaseHandler()
     const usersData: UserData[] = await databaseClient
       .db("lolrank")
       .collection("users")
@@ -45,6 +37,6 @@ async function databaseHandler(req: NextApiRequest, res: NextApiResponse, next: 
 }
 
 const databaseMiddleware = nextConnect();
-databaseMiddleware.use(databaseHandler);
+databaseMiddleware.use(getSummoners);
 
 export default databaseMiddleware;
