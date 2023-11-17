@@ -3,10 +3,5 @@ import middleware from "../../util/range";
 
 const handler = nextConnect();
 handler.use(middleware);
-handler.get(async (req, res) => {
-  let doc = await req.db;
 
-  //   res.json(doc, l);
-  res.json(doc);
-});
 export default handler;

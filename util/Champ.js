@@ -1,18 +1,12 @@
-import { MongoClient } from "mongodb";
 import nextConnect from "next-connect";
 import launch from "./get_data";
-import fs from "fs/promises";
 import championList from "./champ.json";
-require('dotenv').config();
+import databaseHandler from "./db/database";
 
 const encode_utf8 = (s) => unescape(encodeURIComponent(s));
-const url = process.env.MGURL || "mongodb://localhost:27017/";
-const client = new MongoClient(url, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+
 async function insertchamp(req, res, next) {
-  if (!client.isConnected()) await client.connect();
+  const client = await databaseHandler()
   let db = await client.db("lolrank");
 
   if (parseInt(req.query.code) == 1) {

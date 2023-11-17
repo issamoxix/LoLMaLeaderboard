@@ -120,7 +120,7 @@ function dt() {
         <meta name="twitter:title" content="lolrankmaroc.live" />
 
         <meta property="og:type" content="article" />
-        <meta property="og:url" content="https://lolrankmaroc.live/" />
+        <meta property="og:url" content="https://lolma.vercel.app/" />
         <meta
           property="og:description"
           content="league of legends,lolma,lol Maroc, league of legends Maroc, Moroccan Leaderboard , Top Morrcan Player"
@@ -133,7 +133,7 @@ function dt() {
           content="league of legends,lolma,lol Maroc, league of legends Maroc, Moroccan Leaderboard , Top Morrcan Player"
         />
         <meta name="theme-color" content="#141726"></meta>
-        <link rel="icon" href="https://lolrankmaroc.live/logo/logo3.png" />
+        <link rel="icon" href="https://lolma.vercel.app/logo/logo3.png" />
         {/* nprogress files */}
         <link
           rel="stylesheet"

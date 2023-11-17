@@ -88,7 +88,7 @@ function ChampLadder() {
 
         <meta property="og:title" content={`Top ${title} Moroccan Players `} />
         <meta property="og:type" content="article" />
-        <meta property="og:url" content="https://lolrankmaroc.live/" />
+        <meta property="og:url" content="https://lolma.vercel.app/" />
         <meta
           property="og:image"
           content={`http://lolg-cdn.porofessor.gg/img/banners/champion-banners/${champId}.jpg`}
