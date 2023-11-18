@@ -43,7 +43,7 @@ function LeaderBoard() {
   return (
     <Mcom>
       <Head>
-        <title>LeaderBoard</title>
+        <title>Moroccan LeaderBoard</title>
       </Head>
       <Table data={data} refresh={get_data} active={active} loading={loading} />
       <div className={styles.pag}>
