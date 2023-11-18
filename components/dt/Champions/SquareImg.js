@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import styles from "../../../styles/Chamions/Choose.module.css";
 
-function SquareImg({ ChampName, Cid }) {
+function SquareImg({ ChampName, Cid, ImageUrl }) {
   const router = useRouter();
   return (
     <div
@@ -12,7 +12,7 @@ function SquareImg({ ChampName, Cid }) {
       }
     >
       <img
-        src={`http://ddragon.leagueoflegends.com/cdn/11.8.1/img/champion/${ChampName}`}
+        src={ImageUrl}
         alt="Champion"
       />
       {/* http://ddragon.leagueoflegends.com/cdn/11.8.1/img/champion/Aatrox.png */}

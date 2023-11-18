@@ -21,7 +21,7 @@ function ChampLadderTable({ data, refresh, active = 1, loading, em = false }) {
           </div>
         </th>
         <th>
-          <h3>TRChampionPoints</h3>
+          <h3>CHAMPION MASTERY</h3>
         </th>
 
         <th>

@@ -6,6 +6,13 @@ import databaseHandler from "./db/database";
 const encode_utf8 = (s) => unescape(encodeURIComponent(s));
 
 async function insertchamp(req, res, next) {
+  if (parseInt(req.query.code) == 2) {
+    res.setHeader(
+      'Cache-Control',
+      'public, s-maxage=1800,max-age=1800, stale-while-revalidate=59'
+    )
+    await res.json(championList)
+  }
   const client = await databaseHandler()
   let db = await client.db("lolrank");
 
@@ -61,9 +68,6 @@ async function insertchamp(req, res, next) {
       .sort({ championPoints: -1 })
       .toArray();
     res.json({ data: db, ct: req.ct })
-  } else if (parseInt(req.query.code) == 2) {
-
-    await res.json(championList)
   } else {
     res.json({ salam: "wsalam" });
   }
