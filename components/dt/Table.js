@@ -61,7 +61,7 @@ function Table({ data, refresh, active = 1, loading }) {
         <img
           alt="Loading"
           src="https://developer.riotgames.com/static/img/katarina.55a01cf0560a.gif"
-          // className={styles.loading}
+        // className={styles.loading}
         />
       )}
       {data &&
@@ -81,7 +81,7 @@ function Table({ data, refresh, active = 1, loading }) {
             <td> {`${mob ? d.tier[0] : d.tier} ${d.rank}`} </td>
             <td> {d.lp} </td>
             <td> {d.level} </td>
-            <td> {`${((d.W * 100) / (d.W + d.L)).toFixed(2)}%`} </td>
+            <td><b> {`${((d.W * 100) / (d.W + d.L)).toFixed(0)}%`} </b></td>
           </tr>
         ))}
     </table>
