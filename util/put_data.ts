@@ -39,7 +39,7 @@ async function putData(req: any, res: any, next: any) {
     const client: MongoClient = await databaseHandler()
     const db = client.db("lolrank");
 
-    const summonerName: string = encodeUtf8(req.query.name);
+    const summonerName: string = decodeURIComponent(req.query.name as string);
     const data: any = await launch(summonerName);
     const _data: SummonerData = data.data[0];
 

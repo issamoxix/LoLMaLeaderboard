@@ -17,15 +17,14 @@ function LeaderBoard() {
   const get_data = async (skip = 0, limite = 10) => {
     setData();
     setLoading(true);
-    const res = await fetch(`/api/hello?skip=${skip}&limite=${limite}`);
+    const res = await fetch(`/api/hello?skip=${skip}&limit=${limite}`);
     const json = await res.json();
-
     setData(json.data);
 
     setPages(
-      (json.ct / limite) % 1 == 0
-        ? json.ct / limite
-        : parseInt(json.ct / limite + 1)
+      (json.count / limite) % 1 == 0
+        ? json.count / limite
+        : parseInt(json.count / limite + 1)
     );
     setLoading(false);
   };

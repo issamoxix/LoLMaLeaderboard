@@ -29,7 +29,7 @@ function HomeComp() {
   const get_data = async () => {
     setData();
     setLoading(true);
-    const res = await fetch(`/api/hello?skip=0&limite=10`);
+    const res = await fetch(`/api/hello?skip=0&limit=10`);
     const json = await res.json();
 
     setData(json.data);

@@ -57,7 +57,7 @@ function ChampLadder() {
     const res = await fetch(`/api/Champ?name=${inpt}&ckey=${champId}&code=1`);
     const json = await res.json();
     const { done } = json;
-    setintitre(done);
+    setintitre("Updated !");
     get_Data();
   };
   useEffect(() => {
