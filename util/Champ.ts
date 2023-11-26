@@ -3,29 +3,42 @@ import launch from "./get_data";
 import championList from "./champ.json";
 import databaseHandler from "./db/database";
 
-const encode_utf8 = (s) => unescape(encodeURIComponent(s));
+// Enums
+enum ResponseCode {
+  GetChampionList = 2,
+  UpdateChampion = 1,
+  GetChampionDetails = 0,
+  Default = -1,
+}
 
-async function insertchamp(req, res, next) {
-  if (parseInt(req.query.code) == 2) {
-    res.setHeader(
-      'Cache-Control',
-      'public, s-maxage=1800,max-age=1800, stale-while-revalidate=59'
-    )
-    await res.json(championList)
-  }
-  const client = await databaseHandler()
+enum CacheControlHeaders {
+  MaxAge = 1800,
+  StaleWhileRevalidate = 59,
+}
+
+async function insertChamp(req, res, next) {
+  const client = await databaseHandler();
   let db = await client.db("lolrank");
 
-  if (parseInt(req.query.code) == 1) {
+  const handleGetChampionList = async () => {
+    res.setHeader(
+      'Cache-Control',
+      `public, s-maxage=${CacheControlHeaders.MaxAge}, max-age=${CacheControlHeaders.MaxAge}, stale-while-revalidate=${CacheControlHeaders.StaleWhileRevalidate}`
+    );
+    await res.json(championList);
+  };
+
+  const handleUpdateChampion = async () => {
     if (!req.query.name) {
       res.json({ done: "name not provided" });
+      return;
     }
-    try {
 
-      const encodedName = encode_utf8(req.query.name);
+    try {
+      const encodedName = decodeURIComponent(req.query.name as string);
       const shouldUpdate = true;
       const ckey = parseInt(req.query.ckey);
-      const data = await launch(encodedName, shouldUpdate, ckey);
+      const data:any = await launch(encodedName, shouldUpdate, ckey);
 
       const existingChamps = await db.collection("Champs").find({
         championId: data.championId,
@@ -46,14 +59,17 @@ async function insertchamp(req, res, next) {
       console.error("Error:", error);
       res.status(500).json({ error: "Internal Server Error" });
     }
-    
-  } else if (parseInt(req.query.code) == 0) {
-    let cId = parseInt(req.query.Cid);
-    req.ct = await client
+  };
+
+  const handleGetChampionDetails = async () => {
+    const cId = parseInt(req.query.Cid);
+    console.log(req.query)
+    const ct = await client
       .db("lolrank")
       .collection("Champs")
       .find({ championId: cId }, { $exists: true })
       .count();
+
     db = await client
       .db("lolrank")
       .collection("Champs")
@@ -62,13 +78,31 @@ async function insertchamp(req, res, next) {
       .skip(req.query.skip ? parseInt(req.query.skip) : 0)
       .sort({ championPoints: -1 })
       .toArray();
-    res.json({ data: db, ct: req.ct })
-  } else {
+    res.json({ data: db, ct: ct });
+  };
+
+  const handleDefault = () => {
     res.json({ salam: "wsalam" });
+  };
+
+  const responseCode = parseInt(req.query.code);
+  switch (responseCode) {
+    case ResponseCode.GetChampionList:
+      await handleGetChampionList();
+      break;
+    case ResponseCode.UpdateChampion:
+      await handleUpdateChampion();
+      break;
+    case ResponseCode.GetChampionDetails:
+      await handleGetChampionDetails();
+      break;
+    default:
+      handleDefault();
   }
 
   return next();
 }
+
 const middleware = nextConnect();
-middleware.use(insertchamp);
+middleware.use(insertChamp);
 export default middleware;
