@@ -20,38 +20,33 @@ async function insertchamp(req, res, next) {
     if (!req.query.name) {
       res.json({ done: "name not provided" });
     }
+    try {
 
-    launch(encode_utf8(req.query.name), true, parseInt(req.query.ckey)).then(
-      (data) => {
-        db
-          .collection("Champs")
-          .find(
-            { championId: data.championId, name: data.name },
-            { $exists: true }
-          )
-          .toArray((e, doc) => {
-            if (e) throw e;
-            if (doc.length != 0) {
-              db
-                .collection("Champs")
-                .updateOne(
-                  { championId: data.championId, name: data.name },
-                  { $set: data },
-                  (o, d) => {
-                    if (o) throw o;
-                    res.json({ done: "Refreshed" });
-                  }
-                );
-            } else {
-              db.collection("Champs").insertOne(data, (error, rex) => {
-                if (error) throw error;
+      const encodedName = encode_utf8(req.query.name);
+      const shouldUpdate = true;
+      const ckey = parseInt(req.query.ckey);
+      const data = await launch(encodedName, shouldUpdate, ckey);
 
-                res.json({ done: "Added" });
-              });
-            }
-          });
+      const existingChamps = await db.collection("Champs").find({
+        championId: data.championId,
+        name: data.name,
+      }).toArray();
+
+      if (existingChamps.length !== 0) {
+        await db.collection("Champs").updateOne(
+          { championId: data.championId, name: data.name },
+          { $set: data }
+        );
+        res.json({ done: "Refreshed" });
+      } else {
+        await db.collection("Champs").insertOne(data);
+        res.json({ done: "Added" });
       }
-    );
+    } catch (error) {
+      console.error("Error:", error);
+      res.status(500).json({ error: "Internal Server Error" });
+    }
+    
   } else if (parseInt(req.query.code) == 0) {
     let cId = parseInt(req.query.Cid);
     req.ct = await client

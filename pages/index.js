@@ -88,6 +88,7 @@ function dt() {
         {MetaHeads.map((meta) =>
           <meta name={meta.name} content={meta.content} />
         )}
+        <meta charset="UTF-8"></meta>
         <link
           rel="stylesheet"
           href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"

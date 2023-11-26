@@ -75,10 +75,10 @@ export default async function launch(Username: string, Champ = false, ChampKey =
   const masteryUrl = urlBuilder.buildChampionMasteryUrl(info.id);
   const champInfoString: string = await get_info(masteryUrl)
   let champs_info: ChampInfo[] = JSON.parse(champInfoString);
-
   if (Champ) {
     for (const champ of champs_info) {
       if (champ.championId === ChampKey) {
+        console.log({ name: info.name.toLowerCase(), icon, ...champ })
         return { name: info.name.toLowerCase(), icon, ...champ };
       }
     }
